@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-12" style="padding-bottom: 10px;">
+			<div class="col-md-2">
+				<b>Amount:</b>
+			</div>
+			<div class="col-md-2">
+				<input type="text" value="0" class="form-control ChangeAmount">
+			</div>
+		</div>
+		<div class="col-md-12" style="padding-bottom: 10px;">
+			<div class="col-md-2">
+				<b>Total Amount:</b>
+			</div>
+			<div class="col-md-2">
+				<input type="text" readonly="" id="totalamount1" value="20" class="form-control" />
+			</div>
+		</div>
+
+		<div class="col-md-12"  style="padding-bottom: 10px;">
+			<div class="col-md-2">
+				<b>Total Paid:</b>
+			</div>
+			<div class="col-md-2">
+				<input type="text" value="0"  readonly="" class="form-control tpaid" />
+			</div>
+		</div>
+		<div class="col-md-12" style="padding-bottom: 10px;">
+			<div class="col-md-2">
+				<b>Balance:</b>
+			</div>
+			<div class="col-md-2">
+				<input type="text" readonly="" value="20" class="form-control BalanceAmount" />
+				<input type="hidden" id="returned_change" name="returned_change" value="0" />
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+	$('document').ready(function(){
+		$('.ChangeAmount').keyup(function(){
+			var total_paid = $(this).val();
+			if (total_paid == 0 || total_paid == '' ) {
+				total_paid = 0;
+			}
+			$('#returned_change').val(parseFloat(total_paid).toFixed(2));
+			var balance1 = parseFloat($('#totalamount1').val()) - parseFloat($('.tpaid').val());
+			var balance = parseFloat(balance1) - parseFloat(total_paid);
+			var balance = parseFloat(balance).toFixed(2);
+			$('.BalanceAmount').val(balance);
+		});
+	});
+</script>
+</body>
+</html>
