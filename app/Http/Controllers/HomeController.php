@@ -746,14 +746,14 @@ class HomeController extends Controller
         
         $Equipmentrequest=Equipmentrequest::with(['Equipmentrequestdetail.Equipment','Port_Entries','Country','mCountry','Eladings' , "Epackinglists","Einvoices"])->find($id);
 
-
+        $invoice_value_other_currency=Iinvoice::all();
         $transport = Transport::all();
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
         $exportPort =   Portexport::where('country_id', 1)->get() ;// Portexport::all(); //Portexport::where('country_id',1);
       //  return view('esubstance')->with(compact('isubdetail','entry','countries','met','Customer','Material','Customer','mcon_get','con_get'));
-         return view('esubstance')->with(compact('isubdetail','entry','countries','Material','Equipmentrequest','transport','cif','currency','uom','exportPort'));  
+         return view('esubstance')->with(compact('isubdetail','entry','countries','Material','Equipmentrequest','transport','cif','currency','uom','exportPort','invoice_value_other_currency'));  
      // echo json_encode($cif); 
  }
     // ========================= Update Substance
@@ -765,6 +765,10 @@ class HomeController extends Controller
         $isubdetail->number = $request->number;
         $isubdetail->quantity = $request->quantity;
         $isubdetail->quality = $request->quality;
+        $isubdetail->invoice_value=$request->invoice_value;
+        $isubdetail->billnumber=$request->billnumber;
+        $isubdetail->billdate=$request->billdate;
+        $isubdetail->invoice_value_other_currency=$request->invoice_value_other_currency;
 
         $isubdetail->save();
         return redirect()->route('front.idata')->with('success','Update Successful!')->withInput();
@@ -827,6 +831,10 @@ class HomeController extends Controller
                     'self_usage_percent' => $request->input('self_usage_percent'),
                     'other_usage_percent' => $request->input('other_usage_percent'),
                     'other_info' => $request->input('other_info'),
+                    // 'invoice_value'=>$request->input('invoice_value'),
+                    // ===============foreditinvoicestatement
+                    'billnumber'=>$request->input('billnumber'),
+                    'invoice_value_other_currency'=>$request->input('invoice_value_other_currency'),
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
                     'address' => $request->input('address'),
@@ -855,9 +863,9 @@ class HomeController extends Controller
                                     'billdate'=>$request->billdate[$index] ?  $request->billdate[$index]:0,
                                     'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                                     'invoice_value_other_currency'=>$request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index]:0,
-                                    'grossweight' =>$request->gross[$index] ? $request->gross[$index]:100,
+                                    'grossweight' =>$request->gross[$index]? $request->grossweight[$index]:0,
                                     'quantity' => $request->total[$index],
-                                    'uom' => $request->uom[$index] ? $request->uom[$index]:100,
+                                    'uom' => $request->uom[$index] ? $request->uom[$index]:0,
                                     'quality' => $request->quality[$index],
 
                                 ];
