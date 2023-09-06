@@ -348,8 +348,8 @@
                 <th >{{trans('isubstance.putting')}}</th>
                 <th >{{trans('isubstance.amount')}}</th>
                 <th >{{trans('isubstance.quantity')}}</th>
-                <!-- <th>{{trans('isubstance.gross')}} (KGM)</th>
-								<th>{{trans('isubstance.invoicevalue')}}</th> -->
+                <th>{{trans('isubstance.gross')}} (KGM)</th>
+								<th>{{trans('isubstance.invoicevalue')}}</th>
                 <th>{{trans('isubstance.quanlity')}}</th>
               </tr>
             </thead>
@@ -362,8 +362,8 @@
                 <td>{{$materials->store_type==1? "-":$materials->store_type . ""}}</td>
                 <td>{{$materials->number}} {{@$materials->uom}}</td>
                 <td>{{ \App\Helpers\AppHelper::instance()->format_kg($materials->quantity) }}</td>
-                <!-- <td>{{ \App\Helpers\AppHelper::instance()->format_kg(@$materials->grossweight) }}</td> 
-                <td>{{@$materials->invoice_value}} {{@$isubdetail->currency}}</td> -->
+                <td>{{ \App\Helpers\AppHelper::instance()->format_kg(@$materials->grossweight) }}</td>
+                <td>{{@$materials->invoice_value}} {{@$isubdetail->currency}}</td>
                  <td>{{$materials->quality}}</td>
               </tr>
               @endforeach
