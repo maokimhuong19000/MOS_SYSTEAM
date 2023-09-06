@@ -745,15 +745,15 @@ class HomeController extends Controller
 
         
         $Equipmentrequest=Equipmentrequest::with(['Equipmentrequestdetail.Equipment','Port_Entries','Country','mCountry','Eladings' , "Epackinglists","Einvoices"])->find($id);
-
         $invoice_value_other_currency=Iinvoice::all();
+        $invoice_value=Iinvoice::all();
         $transport = Transport::all();
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
         $exportPort =   Portexport::where('country_id', 1)->get() ;// Portexport::all(); //Portexport::where('country_id',1);
       //  return view('esubstance')->with(compact('isubdetail','entry','countries','met','Customer','Material','Customer','mcon_get','con_get'));
-         return view('esubstance')->with(compact('isubdetail','entry','countries','Material','Equipmentrequest','transport','cif','currency','uom','exportPort','invoice_value_other_currency'));  
+         return view('esubstance')->with(compact('isubdetail','entry','countries','Material','Equipmentrequest','transport','cif','currency','uom','exportPort','invoice_value','invoice_value_other_currency'));  
      // echo json_encode($cif); 
  }
     // ========================= Update Substance
@@ -861,11 +861,11 @@ class HomeController extends Controller
                                     'number' => $value,
                                     'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0, 
                                     'billdate'=>$request->billdate[$index] ?  $request->billdate[$index]:0,
-                                    'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
+                                    // 'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                                     'invoice_value_other_currency'=>$request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index]:0,
                                     'grossweight' =>$request->gross[$index]? $request->grossweight[$index]:0,
                                     'quantity' => $request->total[$index],
-                                    'uom' => $request->uom[$index] ? $request->uom[$index]:0,
+                                    'uom' => $request->uom[$index] ?? 0 ,
                                     'quality' => $request->quality[$index],
 
                                 ];
