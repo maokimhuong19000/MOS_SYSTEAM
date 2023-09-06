@@ -425,9 +425,9 @@
 							            <td><input type="hidden" name="total[]" id="total.row_{{$index+1}}" 
 							            	value="{{$value}}">{{$value}}</td>
 
-											<td><input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
+										<td><input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
 							            	value="{{old('gross')[$index]}}">{{old('gross')[$index]}}</td>
-											<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
+										<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
 							            	value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}</td>
 
 							            <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" 
