@@ -426,7 +426,8 @@
                                         <th>{{trans('isubstance.putting')}}</th>
                                         <th>{{trans('isubstance.amount')}}</th>
                                         <th>{{trans('isubstance.quantity')}}</th>
-
+                                        <th>{{trans('isubstance.gross')}} (KGM)</th>
+								        <th>{{trans('isubstance.invoicevalue')}}</th>
                                         <th>{{trans('isubstance.quanlity')}}</th>
                                         {{--                                    @foreach($isubdetail->Materialrequestdetails as $index =>  $materials)--}}
                                         <th><a id="remove" name="re" onclick="remove()" class="btn btn-danger
@@ -448,7 +449,12 @@
                                             <td id="dis_num"><input type="hidden" name="number[]" id="number.row_{{$index+1}}"
                                                                     value="{{($value->number)}}">{{$value->number}}</td>
                                             <td id="dis_quantity"><input type="hidden" name="total[]" id="total.row_{{$index+1}}"
-                                                                         value="{{ $value->quantity }}">{{$value->quantity }}</td>
+                                                                    value="{{ $value->quantity }}">{{$value->quantity }}</td>
+                                                                         <!-- editmorefield -->
+                                            <td><input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
+							            	                        value="{{old('gross')[$index]}}">{{old('gross')[$index]}}</td>
+											<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
+							            	                        value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}</td>
                                             <td id="dis_quality"><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}"
                                                                         value="{{($value->quality)}}">{{$value->quality}}</td>
                                             <td><input type="checkbox" name="record"></td>
@@ -519,6 +525,17 @@
                                                     <span>{{trans('isubstance.quantity')}}</span><span class="star_require text-danger">*</span>
                                                     <input type="text" name="" class="form-control total" id="total" >
                                                 </div>
+                                                <div class="form-group">
+                                                    <span>{{trans('isubstance.gross')}} (KGM)</span><span class="star_require text-danger">*</span>
+                                                    <input type="text" name="" class="form-control gross" id="gross" >
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <span>{{trans('isubstance.invoicevalue')}}</span><span class="star_require text-danger">*</span>
+                                                    <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+                                                </div>
+
+
 
                                                 <div class="form-group">
                                                     <span>{{trans('isubstance.quanlity')}}</span><br/>
@@ -733,6 +750,9 @@
                     "<td>"+
                     "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
                     "</td>"+
+
+                    
+
 
 
                     "<td>"+
