@@ -196,7 +196,7 @@
                                         <div class="form-group">
                                             <span>{{trans('Incoming_arrival.fro_isubstance')}}</span>
                                             <span class="smtext">
-                                                <input type="text" class="import_date form-control" name="import_date" id="d1" placeholder="datetime picker"></span>                                      
+                                                <input type="text" class="import_date form-control" name="import_date" id="d1" placeholder="datetime picker" value="{{$isubdetail->import_date}}"></span>                                      
                                         </div>
                                     </div>
                             </div>
@@ -341,21 +341,21 @@
 											<div class="form-group">
 	  		    				<span>{{trans('isubstance.billdate')}}</span>
 								  <span class="smtext">
-								<input type="text" class="billdate form-control" name="billdate" id="dbill" placeholder="datetime picker"></span>
+								<input type="text" class="billdate form-control" name="billdate" id="dbill" placeholder="datetime picker" value="{{$isubdetail->billdate}}"></span>
 							</div>
 				        </div>
                         
                         <div class="col-md-4"> 
 									<div class="form-group">
 	  		    				<span>{{trans('isubstance.billnumber')}}</span>				  
-								<input type="text" class="  form-control" name="billnumber" > 
+								<input type="text" class="  form-control" name="billnumber" value="{{$isubdetail->billnumber}}"> 
 							</div>
 				        </div>
 
                         <div class="col-md-4"> 
 							<div class="form-group">
 	  		    				<span>{{trans('isubstance.invoicevalueother')}}</span>	  
-								<input type="text" class="  form-control" name="invoice_value_other_currency" > 
+								<input type="text" class="form-control" name="invoice_value_other_currency" value="{{$isubdetail->invoice_value_other_currency}}"> 
 							</div>
 		                </div>
 
