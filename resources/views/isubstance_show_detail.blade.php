@@ -336,6 +336,7 @@
 
     </div>
   </div>
+  
   <div class="panel panel-moe">
     <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_isubstance.material_request_detail')}}</span></div>
     <div class="panel-body mtable">
