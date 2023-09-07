@@ -449,12 +449,14 @@
                                             <td id="dis_num"><input type="hidden" name="number[]" id="number.row_{{$index+1}}"
                                                                     value="{{($value->number)}}">{{$value->number}}</td>
                                             <td id="dis_quantity"><input type="hidden" name="total[]" id="total.row_{{$index+1}}"
-                                                                    value="{{ $value->quantity }}">{{$value->quantity }}</td>
+                                                                    value="{{ $value->quantity }}">{{$value->quantity }}Kg</td>
                                                                          <!-- editmorefield -->
-                                            <td><input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
-							            	                        value="{{old('gross')[$index]}}">{{old('gross')[$index]}}</td>
-											<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
-							            	                        value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}</td>
+                                            <td id="dis_gross"><input type="hidden" name="gross[]" id="gross.row_{{$index+1}}"
+                                                                    value="{{($value->grossweight)}}">{{$value->grossweight}}Kg</td>
+                                            <td id="dis_invoicevalue"><input type="hidden" name="invoice_value[]" id="invoice_value.row_{{$index+1}}"
+                                                                    value="{{ $value->invoice_value }}">{{$value->invoice_value }}USD</td>
+
+                                           
                                             <td id="dis_quality"><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}"
                                                                         value="{{($value->quality)}}">{{$value->quality}}</td>
                                             <td><input type="checkbox" name="record"></td>
@@ -531,8 +533,8 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <span>{{trans('isubstance.invoicevalue')}}</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+                                                    <span>{{trans('isubstance.invoice_value')}}</span><span class="star_require text-danger">*</span>
+                                                    <input type="text" name="" class="form-control invoicevalue" id="invoice_value" >
                                                 </div>
 
 
@@ -751,9 +753,12 @@
                     "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
                     "</td>"+
 
-                    
-
-
+                    "<td>"+
+                    "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
+                    "</td>"+
+                    "<td>"+
+                    "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
+                    "</td>"+
 
                     "<td>"+
                     "<input type='hidden' name='quality[]' id='qu."+new_id+"' value='"+qu+"'>" +qu+
