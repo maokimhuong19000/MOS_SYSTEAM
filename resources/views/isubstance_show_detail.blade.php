@@ -363,7 +363,8 @@
                 <td>{{$materials->number}} {{@$materials->uom}}</td>
                 <td>{{ \App\Helpers\AppHelper::instance()->format_kg($materials->quantity) }}</td>
                 <td>{{ \App\Helpers\AppHelper::instance()->format_kg(@$materials->grossweight) }}</td>
-                <td>{{@$materials->invoice_value}} {{@$isubdetail->currency}}</td>
+                <td>{{@$materials->invoice_value}} {{@$isubdetail->invoice_value}}</td>
+
                  <td>{{$materials->quality}}</td>
               </tr>
               @endforeach
