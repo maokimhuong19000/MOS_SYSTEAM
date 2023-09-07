@@ -601,7 +601,7 @@ class HomeController extends Controller
         $materialrequest->currency = $request->currency ? $request->currency : "USD";
         $materialrequest->exchange_rate = $request->exchange_rate ? $request->exchange_rate : 4100;
         $materialrequest->invoice_value_other_currency = $request->invoice_value_other_currency ? $request->invoice_value_other_currency : 0;
-
+        // $materialrequest->grossweight=$request->grossweight;
         $materialrequest->place_export = $request->place_export ? $request->place_export : "";
         $materialrequest->address = $request->address ? $request->address : "";
         $materialrequest->import_status = 0;
@@ -628,7 +628,7 @@ class HomeController extends Controller
                     'number' => $value,
                     'quantity' => $request->total[$index],
                     'quality' => $request->quality[$index],
-                    'invoice_value' => $request->invoicevalue[$index],
+                    'invoice_value' => $request->invoicevalue[$index] ?? 0,
                     'grossweight' => $request->gross[$index],
                     'uom' => $request->uom[$index],
 
@@ -742,7 +742,7 @@ class HomeController extends Controller
             ->orWhere('id', $isubdetail->from_country_id)
             ->orWhere('id', $isubdetail->manufacture_country_id)
             ->get();
-
+        
 
 
         $Equipmentrequest = Equipmentrequest::with(['Equipmentrequestdetail.Equipment', 'Port_Entries', 'Country', 'mCountry', 'Eladings', "Epackinglists", "Einvoices"])->find($id);
@@ -752,6 +752,7 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
+        
         $exportPort = Portexport::where('country_id', 1)->get(); // Portexport::all(); //Portexport::where('country_id',1);
         //  return view('esubstance')->with(compact('isubdetail','entry','countries','met','Customer','Material','Customer','mcon_get','con_get'));
         return view('esubstance')->with(compact('isubdetail', 'entry', 'countries', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'exportPort', 'invoice_value', 'invoice_value_other_currency'));
@@ -860,13 +861,13 @@ class HomeController extends Controller
                             'material_id' => $request->material_id[$index],
                             'store_type' => $request->store_type[$index],
                             'number' => $value,
-                            'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0,
+                            'invoice_value' => $request->invoice_value[$index],
                             'billdate' => $request->billdate[$index] ? $request->billdate[$index] : 0,
                             // 'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                             'invoice_value_other_currency' => $request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index] : 0,
-                            'grossweight' => $request->gross[$index] ? $request->grossweight[$index] : 0,
+                            'grossweight' => $request->gross[$index] ?? 0,
                             'quantity' => $request->total[$index],
-                            'uom' => $request->uom[$index] ?? 0,
+                            'uom' => $request->uom[$index]  ?? 0,
                             'quality' => $request->quality[$index],
 
                         ];
@@ -1008,6 +1009,7 @@ class HomeController extends Controller
                                     'material_id' => $request->material_id[$index],
                                     'store_type' => $request->store_type[$index],
                                     'number' => $value,
+                                    'invoicevalue'=>$request->invoicevalue[$index],
                                     'quantity' => $request->total[$index],
                                     'quality' => $request->quality[$index],
 
@@ -1276,6 +1278,7 @@ class HomeController extends Controller
             ->where('year', date('Y'))
             ->join('materials', 'materials.id', '=', 'aquotas.material_id')
             ->get();
+        
         $countries = Country::all();
         $Customer = Customer::find(Auth::id());
         $isubdetail = Materialrequest::with(['Materialrequestdetails.Material', 'Country', 'mCountry', 'Iladings', "Ipackinglists", "Iinvoices"])->find($id);
