@@ -770,7 +770,9 @@ class HomeController extends Controller
         $isubdetail->invoice_value = $request->invoice_value;
         $isubdetail->billnumber = $request->billnumber;
         $isubdetail->billdate = $request->billdate;
+        $isubdetail->currency= $request->currency;
         $isubdetail->invoice_value_other_currency = $request->invoice_value_other_currency;
+        $isubdetail->Incoterm=$request->Incoterm;
 
         $isubdetail->save();
         return redirect()->route('front.idata')->with('success', 'Update Successful!')->withInput();
@@ -835,7 +837,9 @@ class HomeController extends Controller
                     'other_info' => $request->input('other_info'),
                     // 'invoice_value'=>$request->input('invoice_value'),
                     // ===============foreditinvoicestatement
+                    'billdate'=>date('y-m-d H:i:s',strtotime(request('billdate'))),
                     'billnumber' => $request->input('billnumber'),
+                    'currency'=>$request->input('currency'),
                     'invoice_value_other_currency' => $request->input('invoice_value_other_currency'),
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
@@ -861,13 +865,15 @@ class HomeController extends Controller
                             'material_id' => $request->material_id[$index],
                             'store_type' => $request->store_type[$index],
                             'number' => $value,
-                            'invoice_value' => $request->invoice_value[$index],
-                            'billdate' => $request->billdate[$index] ? $request->billdate[$index] : 0,
+
+                            'invoice_value' => $request->invoice_value[$index] ?? 0,
+                            'billdate' => $request->billdate[$index],
+                            
                             // 'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                             'invoice_value_other_currency' => $request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index] : 0,
                             'grossweight' => $request->gross[$index] ?? 0,
                             'quantity' => $request->total[$index],
-                            'uom' => $request->uom[$index]  ?? 0,
+                            'uom' => $request->uom[$index]?? .00,
                             'quality' => $request->quality[$index],
 
                         ];
