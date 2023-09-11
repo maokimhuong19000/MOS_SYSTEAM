@@ -551,7 +551,7 @@
 
 										<div class="form-group">
 			                              <span>{{trans('isubstance.invoicevalue')}}</span><span class="star_require text-danger">*</span>
-			                              <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+			                              <input type="text" name="" class="form-control invoicevalue" id="invoice_value" >
 			                            </div>
 
 			                            <div class="form-group">
@@ -735,7 +735,7 @@
 				var total=$('#total').val();
 				var qu =  $("input[name='iquality']:checked").val();
 				var gross=$('#gross').val();
-				var invoicevalue = $('#invoicevalue').val();
+				var invoice_value = $('#invoice_value').val();
 				var uom = $('#uom').val();
 
 
@@ -780,7 +780,7 @@
 			            "</td>"+
 
 						"<td>"+
-			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+
+			            	"<input type='hidden' name='invoice_value[]' id='invoice_value."+new_id+"' value='"+invoice_value+"'>" +invoice_value+
 			            "</td>"+
 
 			           
