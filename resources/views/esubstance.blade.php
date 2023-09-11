@@ -514,49 +514,64 @@
                                                 </div>
 
                                                 <div class="form-group" style="display: none" id="type_other" >
-                                                    <span>ចំណុះផ្សេងទៀត/Other</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="other_c" class="form-control other_c" id="other_c" autocomplete="off" value="1" >
-                                                </div>
+			                              <span>ចំណុះផ្សេងទៀត/Other</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="other_c" class="form-control other_c" id="other_c" autocomplete="off" value="1" >
+			                            </div>
+			                          
+										<div class="row">
+											<div class="col-xs-6">
+												<div class="form-group">
+												<span>{{trans('isubstance.amount')}}</span><span class="star_require text-danger">*</span>
+												<input type="text" name="" class="form-control amount" id="amount" autocomplete="off">
+												</div>
+											</div>
+											<div class="col-xs-6">
+												<div class="form-group">
+													<span>{{trans('isubstance.uom')}}</span><span class="star_require text-danger">*</span>
+													<select   name="" class="form-control uom" id="uom" autocomplete="off">
+													@foreach($uom as $u)
+													<option value="{{$u->code}}">{{$u->description}}</option>
+													@endforeach
+													</select>
+													
+												</div>
+											</div>
 
-                                                <div class="form-group">
-                                                    <span>{{trans('isubstance.amount')}}</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="" class="form-control amount" id="amount" autocomplete="off">
-                                                </div>
+										</div>
 
-                                                <div class="form-group">
-                                                    <span>{{trans('isubstance.quantity')}}</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="" class="form-control total" id="total" >
-                                                </div>
-                                                <div class="form-group">
-                                                    <span>{{trans('isubstance.gross')}} (KGM)</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="" class="form-control gross" id="gross" >
-                                                </div>
+			                            <div class="form-group">
+			                              <span>{{trans('isubstance.quantity')}} (KGM)</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control total" id="total" >
+			                            </div>
 
-                                                <div class="form-group">
-                                                    <span>{{trans('isubstance.invoice_value')}}</span><span class="star_require text-danger">*</span>
-                                                    <input type="text" name="" class="form-control invoicevalue" id="invoice_value" >
-                                                </div>
+										<div class="form-group">
+			                              <span>{{trans('isubstance.gross')}} (KGM)</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control gross" id="gross" >
+			                            </div>
 
+										<div class="form-group">
+			                              <span>{{trans('isubstance.invoicevalue')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+			                            </div>
 
+			                            <div class="form-group">
+							              <span>{{trans('isubstance.quanlity')}}</span><br/>
 
-                                                <div class="form-group">
-                                                    <span>{{trans('isubstance.quanlity')}}</span><br/>
+							              <input type="radio" name="iquality" id="virgin" value="សុទ្ធ" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('isubstance.net_product')}} </span><br>
 
-                                                    <input type="radio" name="iquality" id="virgin" value="សុទ្ធ" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('isubstance.net_product')}} </span><br>
+							              
 
-
-
-                                                    <input type="radio" name="iquality" id="both" value="សម្អាត និង កែច្នៃឡើងវិញ">&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info">{{trans('isubstance.clean_recycle')}}</span><br>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" name="button" class="btn btn-primary" value="Save" id="add_sub">Add new</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							              <input type="radio" name="iquality" id="both" value="សម្អាត និង កែច្នៃឡើងវិញ">&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info">{{trans('isubstance.clean_recycle')}}</span><br>
+							            </div>
+			                          </form>
+			                        </div>
+			                        <div class="modal-footer">
+			                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			                          <button type="button" class="btn btn-primary" id="add_sub">Add new</button>
+			                        </div>
+			                      </div>
+			                    </div>
+			                </div>
                             <!-- end popup -->
 
                             <div class="col-sm-12" > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
@@ -713,83 +728,106 @@
 
             // button add
             $("#add_sub").click(function(){
-                var exist_input=$("input[name='material_id[]']").val();
-                var material_val =$(".substance option:selected").val();
-                var number=$('#amount').val();
-                var other=($('.other option:selected').val() == 0?($('.other_c').val()-0):($('.other option:selected').val()-0) )
-                var total=$('#total').val();
-                var qu =  $("input[name='iquality']:checked").val();
+				var exist_input=$("input[name='material_id[]']").val();
+				var material_val =$(".substance option:selected").val();
+				var number=$('#amount').val();
+				var other=($('.other option:selected').val() == 0?($('.other_c').val()-0):($('.other option:selected').val()-0) )
+				var total=$('#total').val();
+				var qu =  $("input[name='iquality']:checked").val();
+				var gross=$('#gross').val();
+				var invoicevalue = $('#invoicevalue').val();
+				var uom = $('#uom').val();
 
 
-                if ($('#table_isubstance tbody').children(':last').attr("id")) {
-                    var id = $('#table_isubstance tbody').children(':last').attr("id");
-                    //row_1
-                    id = id.substring(4);
-                    var new_id = Number(id) + 1;
-                    new_id = "row_" + new_id;
-                } else {
-                    var id = 0;
-                    var new_id = Number(id) + 1;
-                    new_id = "row_" + new_id;
-                }
-                // console.log(new_id);
-                var markup =
-                    "<tr id='"+new_id+"'>"+
-                    "<td class='order'>"+(Number(id) + 1)+"</td>"+
+					if ($('#table_isubstance tbody').children(':last').attr("id")) {
+			            var id = $('#table_isubstance tbody').children(':last').attr("id");
+			            //row_1
+			            id = id.substring(4);
+			            var new_id = Number(id) + 1;
+			            new_id = "row_" + new_id;
+			        } else {
+			            var id = 0;
+			            var new_id = Number(id) + 1;
+			            new_id = "row_" + new_id;
+			        }
+			        // console.log(new_id);
+					var markup = 
+		            "<tr id='"+new_id+"'>"+
+			            "<td class='order'>"+(Number(id) + 1)+"</td>"+
 
-                    "<td>"+"<input type='hidden' name='material_id[]' id='material_id."+
-                    new_id+
-                    "' value='"+material_val+"'>" +$("#substance option:selected").text()+
-                    "</td>"+
+			            "<td>"+"<input type='hidden' name='material_id[]' id='material_id."+
+			            new_id+
+			            "' value='"+material_val+"'>" +$("#substance option:selected").text()+ 
+						'<input type="text" class="com_pany" id="com_pany" name="com_pany[]" disabled>'+ "</td>"+
+			            	'<input type="hidden" class="subc"  name="sub[]" value="'+$("#substance option:selected").text()+'">'+
+			            	'<input type="hidden" class="subcom"  name="com[]" value="">'+
+			            "</td>"+
 
+			            
+			        	"<td>"+"<input type='hidden' name='store_type[]' id='store."+new_id+"' value='"+other+"'>"+other+"Kg/cly</td>"+
 
-                    "<td>"+"<input type='hidden' name='store_type[]' id='store."+new_id+"' value='"+other+"'>"+other+"Kg/cly</td>"+
+			            "<td>"+
+							"<input type='hidden' name='uom[]' id='uom."+new_id+"' value='"+uom+"'>"+
+			            	"<input type='hidden' name='number[]' id='number."+new_id+"' value='"+number+"'>"+number+" "+ uom+
+			            "</td>"+
 
-                    "<td>"+
-                    "<input type='hidden' name='number[]' id='number."+new_id+"' value='"+number+"'>"+number+
-                    "</td>"+
+			            "<td>"+
+			            	"<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
+			            "</td>"+
 
-                    "<td>"+
-                    "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
-                    "</td>"+
+						"<td>"+
+			            	"<input type='hidden' name='gross[]' id='gross."+new_id+"' value='"+gross+"'>" +gross+
+			            "</td>"+
 
-                    "<td>"+
-                    "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
-                    "</td>"+
-                    "<td>"+
-                    "<input type='hidden' name='total[]' id='total."+new_id+"' value='"+total+"'>" +total+
-                    "</td>"+
+						"<td>"+
+			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+
+			            "</td>"+
 
-                    "<td>"+
-                    "<input type='hidden' name='quality[]' id='qu."+new_id+"' value='"+qu+"'>" +qu+
-                    "</td>"+
+			           
+			           "<td>"+
+			            	"<input type='hidden' name='quality[]' id='qu."+new_id+"' value='"+qu+"'>" +qu+
+			            "</td>"+
 
+			           
 
+			            "<td>"+
+		                  "<input type='checkbox' name='record'>"+
+		                "</td>"+
 
-                    "<td>"+
-                    "<input type='checkbox' name='record'>"+
-                    "</td>"+
-
-                    "</tr>";
-
-                $("#table_isubstance tbody").append(markup);
-                $.ajax({
-                    type:'GET',
-                    url:'{!!Route("findeSubstance")!!}',
-                    data:{'id':material_val},
-                    dataType:'json',
-                    success:function(data)
-                    {
-                        return true;
-                    }
-                });
-                $('#add_isubstance').modal('hide');
-                $("#substance option:first").prop('selected',true);
-                $('#amount').val('');
-                $('#other').val('');
-                $('.other option:first').prop('selected',true)
-
-            });
+		            "</tr>";
+		            /*var check_meterial_id = 0;
+		            $("#table_isubstance input[name='material_id[]']").each(function(){
+			   			if ($(this).val()==material_val){
+			   				check_meterial_id = 1;
+			   			}
+		            });
+		   			if (check_meterial_id>0){
+		                alert('already substance existing');
+		                $('#add_isubstance').modal('hide');
+		            }
+		            else{ */
+			            $("#table_isubstance tbody").append(markup);
+				            $.ajax({
+								type:'GET',
+								url:'{!!Route("findeSubstance")!!}',
+								data:{'id':material_val},
+								dataType:'json',
+								success:function(data)
+								{
+									$('#'+new_id+' .com_pany').val(data.com_name);
+									$('#'+new_id+' .subcom').val(data.com_name);
+									//$('#'+new_id+' .subc').val(data.substance);
+									//$('#'+new_id+' .code').val(data.code);
+									return true;
+								}
+							});
+						$('#add_isubstance').modal('hide');
+						$("#substance option:first").prop('selected',true);
+						$('#amount').val('');
+						$('#other').val('');
+						$('.other option:first').prop('selected',true);
+					//}
+    		});
 
             // ===================end button add =========================================
 
