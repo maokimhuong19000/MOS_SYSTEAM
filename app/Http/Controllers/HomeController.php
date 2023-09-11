@@ -771,6 +771,7 @@ class HomeController extends Controller
         $isubdetail->billnumber = $request->billnumber;
         $isubdetail->billdate = $request->billdate;
         $isubdetail->currency= $request->currency;
+        $isubdetail->uom=$request->uom;
         $isubdetail->invoice_value_other_currency = $request->invoice_value_other_currency;
         $isubdetail->Incoterm=$request->Incoterm;
 
@@ -840,6 +841,7 @@ class HomeController extends Controller
                     'billdate'=>date('y-m-d H:i:s',strtotime(request('billdate'))),
                     'billnumber' => $request->input('billnumber'),
                     'currency'=>$request->input('currency'),
+//  'oum'=>$request->input('uom'), 
                     'invoice_value_other_currency' => $request->input('invoice_value_other_currency'),
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
@@ -866,14 +868,14 @@ class HomeController extends Controller
                             'store_type' => $request->store_type[$index],
                             'number' => $value,
 
-                            'invoice_value' => $request->invoice_value[$index] ?? 0,
+                            'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index]:"",
                             'billdate' => $request->billdate[$index],
                             
                             // 'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                             'invoice_value_other_currency' => $request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index] : 0,
-                            'grossweight' => $request->gross[$index] ?? 0,
+                            'grossweight' => $request->gross[$index] ? $request->gross[$index]:0,
                             'quantity' => $request->total[$index],
-                            'uom' => $request->uom[$index]?? .00,
+                            'uom' => $request->uom[$index] ?? "",
                             'quality' => $request->quality[$index],
 
                         ];
