@@ -363,41 +363,30 @@
                 <td>{{$materials->number}} {{@$materials->uom}}</td>
                 <td>{{ \App\Helpers\AppHelper::instance()->format_kg($materials->quantity) }}</td>
                 <td>{{ \App\Helpers\AppHelper::instance()->format_kg(@$materials->grossweight) }}</td>
-                <td>{{@$materials->invoice_value}} {{@$isubdetail->invoice_value}}</td>
-
+                <td>{{@$materials->invoice_value}} {{@$isubdetail->invoice_value}} USD</td>
                  <td>{{$materials->quality}}</td>
               </tr>
               @endforeach
            
             </tbody>
         </table>
-
- 
-
-         @if ($isubdetail->import_status >= 2 )
-          
-        
+         @if ($isubdetail->import_status >= 2 )      
             <div class="form-group">
                <div class="form-group">
                   <span>{{trans('front_isubstance.file_department')}}</span>  
               </div>
             </div>
-      
          @endif
-
-
                 <div class="col-sm-6 "></div>
                   <div class="col-sm-6 ">
-                    <div class="text-right">
-                      
+                    <div class="text-right">       
                           <a href="{{route('front.idata')}}" class="btn btn-primary btn-lg">Back</a>
                            @if($isubdetail->astatus < 2 )
                                <a href="{{route('isubstance.esubstance',$isubdetail->id)}}" class="btn btn-success btn-lg">Edit/កែប្រែ</a>
                            @endif
-                    </div>
+                  </div>
                 </div>
-
-                </div>
+              </div>
     </div>
   </div>
 
