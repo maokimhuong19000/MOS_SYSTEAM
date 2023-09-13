@@ -286,7 +286,6 @@
                       <th>{{trans('iequipment.capacity')}}</th>
                       <th>{{trans('iequipment.weight')}}</th>
 									    <th>{{trans('iequipment.invoicevalue')}}</th>
-
                       <th>{{trans('isubstance.quanlity')}}</th>
                     </tr>
             </thead>

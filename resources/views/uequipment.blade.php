@@ -280,12 +280,12 @@
                 </div>
                 <!-- ==================================== -->
                 <div class="panel panel-moe">
-    <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_isubstance.invoice_info')}}</span></div>
-    <div class="panel-body ">
+                <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_isubstance.invoice_info')}}</span></div>
+                <div class="panel-body ">
 
-	<div class="col-md-12">
-		<div class="col-md-4"> 
-		<div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-4"> 
+                    <div class="form-group">
 	  		    				<span>{{trans('isubstance.incoterm')}}</span>
 	  		    				<span class="star_require text-danger">*</span>
 	  		    				<select name="incoterm" class="form-control">			
@@ -300,7 +300,7 @@
 						<div class="col-md-4"> 
 									<div class="form-group">
 	  		    				<span>{{trans('isubstance.billdate')}}</span>
-								  <span class="smtext"><input type="text" class="billdate form-control" name="billdate" id="d1" placeholder="datetime picker"></span>
+								  <span class="smtext"><input type="text" class="billdate form-control" name="billdate" id="dbill" placeholder="datetime picker"></span>
 							</div>
 						</div>	
 				<div class="col-md-4"> 
@@ -355,15 +355,7 @@
         </div>
         </div>
         </div>
-		
-	
-	
-              
-
-
-            
-
-
+    
                 <!-- ============================================== -->
                 <div class="panel panel-moe">
                     <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_iequipment.request_detail')}}</span></div>
@@ -383,9 +375,9 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>{{trans('iequipment.desc')}}</th>
                                     <th>{{trans('iequipment.type')}}</th>
                                     <th>{{trans('isubstance.amount')}}</th>
-                                    <th>{{trans('iequipment.desc')}}</th>
                                     <th>{{trans('iequipment.capacity_type')}}</th>
                                     <th>{{trans('iequipment.capacity')}}</th>
                                     <th>{{trans('iequipment.substance')}}</th>
@@ -399,14 +391,17 @@
                                 @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $value)
                                 <tr id="row_{{$index}}">
                                     <td class='order'>{{$index+1}}</td>
+                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>  
                                     <td><input type='hidden' name='equipment_id[]' id='material_id.row_{{$index+1}}' value="{{$value->equipment_id}}">{{$value->Equipment->taxcode}}--{{$value->Equipment->product_name}}
                                     </td>
-                                    <td> <input type="hidden" name="amount[]" value="{{$value->amount}}">{{$value->amount}}</td>
+                                   
 
-                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>
+                                   
+                                    <td> <input type="hidden" name="amount[]" value="{{$value->amount}}">{{$value->amount}}</td>
 
                                     <td><input type="hidden" name="capacity[]" id="number.row_{{$index+1}}" value="{{$value->capacity}}">{{$value->capacity}}</td>
                                     <td><input type="hidden" name="capvalue[]" id="number.row_{{$index+1}}" value="{{$value->capvalue}}">{{$value->capvalue}}</td>
+                                    
 
                                     <td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
                                     <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" value="{{$value->quality}}">{{$value->quality}}</td>
@@ -419,10 +414,6 @@
 
 
                         <!-- ========================pop up isubstance form ============================-->
-
-
-
-
 
                     </div>
                 </div>
@@ -480,7 +471,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+											<div class="col-xs-6">
+										<div class="form-group">
+			                              <span>{{trans('iequipment.net')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control net" id="net" >
+			                            </div>
+										</div>
+										<div class="col-xs-6">
+										<div class="form-group">
+			                              <span>{{trans('iequipment.gross')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control gross" id="gross" >
+			                            </div>
+										</div>
+										</div>
 
+
+										<div class="form-group">
+			                              <span>{{trans('iequipment.invoicevalue')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+			                            </div>
                                         <div class="form-group">
                                             <span>{{trans('iequipment.substance')}}</span><br />
                                             <select name="" class="form-control substance" id="substance">
@@ -489,7 +499,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-
+                                        
                                         <div class="form-group">
                                             <span>{{trans('isubstance.quanlity')}}</span><br />
 
@@ -539,6 +549,10 @@
         $('#d1').datepicker({
             format: "yyyy-mm-dd"
         });
+        $('#dbill').datepicker({
+                format: 'yy-mm-dd',  
+        });
+
 
 
         $("#purpose_of_use").change(function() {

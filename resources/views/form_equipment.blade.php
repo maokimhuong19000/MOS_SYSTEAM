@@ -472,14 +472,14 @@
 			                              <span>{{trans('iequipment.net')}}</span><span class="star_require text-danger">*</span>
 			                              <input type="text" name="" class="form-control net" id="net" >
 			                            </div>
-</div>
-<div class="col-xs-6">
+										</div>
+										<div class="col-xs-6">
 										<div class="form-group">
 			                              <span>{{trans('iequipment.gross')}}</span><span class="star_require text-danger">*</span>
 			                              <input type="text" name="" class="form-control gross" id="gross" >
 			                            </div>
-</div>
-</div>
+										</div>
+										</div>
 
 
 										<div class="form-group">
