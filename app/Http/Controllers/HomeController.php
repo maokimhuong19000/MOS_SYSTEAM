@@ -888,7 +888,7 @@ class HomeController extends Controller
             }
         }
         // ======if not null
-        else {
+        else { 
 
             $validatedData = $request->validate(
                 [

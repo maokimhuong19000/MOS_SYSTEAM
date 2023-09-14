@@ -280,12 +280,13 @@
 
                     <tr>
                 			<th >#</th>
-			                <th>{{trans('iequipment.desc')}}</th>
                       <th>{{trans('iequipment.type')}}</th>
-				        			<th>{{trans('isubstance.amount')}}</th>
+                      <th>{{trans('isubstance.amount')}}</th>
+			                <th>{{trans('iequipment.desc')}}</th>		
                       <th>{{trans('iequipment.capacity')}}</th>
                       <th>{{trans('iequipment.weight')}}</th>
 									    <th>{{trans('iequipment.invoicevalue')}}</th>
+                      <th>{{trans('iequipment.substance')}}</th>
                       <th>{{trans('isubstance.quanlity')}}</th>
                     </tr>
             </thead>
@@ -294,13 +295,14 @@
                @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $equipment)
 			                  <tr>
 			                  	<td>{{($index+1)}}</td>
+                          
+			                    <td>{{$equipment->Equipment->taxcode}}{{$equipment->Equipment->product_name}}</td>
+                          <td>{{$equipment->amount}}{{@$equipment->uom}}</td>
                           <td>{{$equipment->description}}</td>
-			                    <td>{{$equipment->Equipment->taxcode}}<br/>{{$equipment->substance}}</td>
-			                    <td>{{$equipment->amount}}{{@$equipment->uom}}</td>
                           <td>{{$equipment->capvalue}}{{$equipment->capacity}}</td>
-			                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>
-			                    
-			                    <td>{{@$equipment->invoice_value}} {{@$Equipmentrequest->currency}}</td>
+			                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>			                    
+			                    <td>{{@$equipment->invoice_value }} {{@$Equipmentrequest->currency}}</td>
+                          <td>{{@$equipment->substance}} {{@$Equipmentrequest->substance}}</td>
                           <td>{{$equipment->quality}}</td>
 			                  </tr>
 			                  @endforeach

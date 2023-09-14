@@ -330,7 +330,7 @@
 									<th>{{trans('iequipment.capacity')}}</th>
 				        			<th>{{trans('iequipment.weight')}}</th>
 									<th>{{trans('iequipment.invoicevalue')}}</th>
-
+                                    <th>{{trans('iequipment.substance')}}</th>
 				        			<th>{{trans('isubstance.quanlity')}}</th>
 				        			<th><a id="remove" onclick="remove()" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></th>
 				        		</tr>
@@ -370,10 +370,13 @@
 							            	value="{{old('gross')[$index]}}">GROSS: {{old('gross')[$index]}}
 										</td>
 										
-											<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
-							            	value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}</td>
+										<td>
+											<input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
+							            	value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}
+										</td>
 
-							          
+										<td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
+
 							            <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" 
 							            	value="{{old('quality')[$index]}}">{{old('quality')[$index]}}</td>
 
@@ -500,10 +503,7 @@
 			                             <div class="form-group">
 							              <span>{{trans('isubstance.quanlity')}}</span><br/>
 
-							              <input type="radio" name="iquality" id="virgin" value="ថ្មី" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('iequipment.new')}} </span><br>
-
-							              
-
+							              <input type="radio" name="iquality" id="virgin" value="ថ្មី" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('iequipment.new')}} </span><br>						            
 							              <input type="radio" name="iquality" id="both" value="ប្រើប្រាស់រួច">&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info">{{trans('iequipment.used')}}</span><br>
 							            </div>
 
@@ -745,7 +745,7 @@
 
                     "<td>"+
                         "<input type='hidden' name='des[]' value='"+des+"'>"+des+
-						"<input type='hidden' name='substance[]' value='"+substance+"'>USE Substance: "+substance+
+					
                     "</td>"+
 
                     "<td>"+
@@ -763,8 +763,14 @@
 
 
 					"<td>"+
-			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+
+			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+"USD"+
 			        "</td>"+
+
+
+					"<td>"+
+						"<input type='hidden' name='substance[]' value='"+substance+"'>"+substance+
+                    "</td>"+
+
 
                     "<td>"+
 			            	"<input type='hidden' name='quality[]' id='qu."+new_id+"' value='"+qu+"'>" +qu+
