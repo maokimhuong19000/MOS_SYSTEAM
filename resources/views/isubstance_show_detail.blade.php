@@ -252,19 +252,10 @@
                     <a href="{{asset($file->file_path)}}" target="_blank"> <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a><br/>
                     @endforeach
                   </div>
-
-
-              
+                  
               </div>
 
-
-
-
               </div>
-
-
-
-
                 <div class="col-md-12">
                   <div class="form-group">
                     <span>{{trans('front_isubstance.other_info')}}</span>
