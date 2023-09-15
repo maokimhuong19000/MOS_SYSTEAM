@@ -888,7 +888,7 @@ class HomeController extends Controller
             }
         }
         // ======if not null
-        else { 
+        else {
 
             $validatedData = $request->validate(
                 [
@@ -1322,6 +1322,7 @@ class HomeController extends Controller
         return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
     }
 
+    
     private function check_finish_equipment($customer_id)
     {
         $mrequest = Equipmentrequest::join('customers', 'equipmentrequests.customer_id', '=', 'customers.id')
