@@ -814,7 +814,7 @@ public function sendequipment($id){
  
   }elseif($responsedata->status== 500){
     
-    return redirect()->action('EquipmentrequestController@showdetail',$id)->with('danger', 'NSW Error: '.json_encode($responsedat));
+    return redirect()->action('EquipmentrequestController@showdetail',$id)->with('danger', 'NSW Error: '.json_encode($responsedata));
   
   }else{
   
