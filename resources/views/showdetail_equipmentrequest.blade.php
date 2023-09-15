@@ -300,12 +300,12 @@
                           <td>{{$equipment->description}}</td>
                           <td>{{$equipment->capvalue}}{{$equipment->capacity}}</td>
 			                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>			                    
-			                    <td>{{@$equipment->invoicevalue }} {{@$Equipmentrequest->currency}}</td>
+			                    <td>{{@$equipment->invoice_value }} {{@$Equipmentrequest->currency}}</td>
                           <td>{{@$equipment->substance}} {{@$Equipmentrequest->substance}}</td>
                           <td>{{$equipment->quality}}</td>
 			                  </tr>
 			                  @endforeach
-           
+
             </tbody>
         </table>
     </div>
