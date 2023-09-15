@@ -375,13 +375,16 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{trans('iequipment.desc')}}</th>
                                     <th>{{trans('iequipment.type')}}</th>
                                     <th>{{trans('isubstance.amount')}}</th>
-                                    <th>{{trans('iequipment.capacity_type')}}</th>
+                                    <th>{{trans('iequipment.desc')}}</th>                                    
                                     <th>{{trans('iequipment.capacity')}}</th>
+                                    <th>{{trans('iequipment.capacity_type')}}</th>
+                                    <th>{{trans('iequipment.weight')}}</th>
+                                    <th>{{trans('iequipment.invoicevalue')}}</th>
                                     <th>{{trans('iequipment.substance')}}</th>
                                     <th>{{trans('isubstance.quanlity')}}</th>
+                                    
                                     <th><a id="remove" onclick="remove()" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></th>
                                 </tr>
                             </thead>
@@ -391,16 +394,26 @@
                                 @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $value)
                                 <tr id="row_{{$index}}">
                                     <td class='order'>{{$index+1}}</td>
-                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>  
-                                    <td><input type='hidden' name='equipment_id[]' id='material_id.row_{{$index+1}}' value="{{$value->equipment_id}}">{{$value->Equipment->taxcode}}--{{$value->Equipment->product_name}}
+                                    <td><input type='hidden' name='equipment_id[]' id='material_id.row_{{$index+1}}' value="{{$value->equipment_id}}">{{$value->Equipment->taxcode}}{{$value->Equipment->product_name}}
                                     </td>
-                                   
-
-                                   
                                     <td> <input type="hidden" name="amount[]" value="{{$value->amount}}">{{$value->amount}}</td>
+                                    
+                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>  
+
+                                    
+                                    <td><input type="hidden" name="capvalue[]" id="number.row_{{$index+1}}" value="{{$value->capvalue}}">{{$value->capvalue}}</td>
 
                                     <td><input type="hidden" name="capacity[]" id="number.row_{{$index+1}}" value="{{$value->capacity}}">{{$value->capacity}}</td>
-                                    <td><input type="hidden" name="capvalue[]" id="number.row_{{$index+1}}" value="{{$value->capvalue}}">{{$value->capvalue}}</td>
+                                    <td>
+										<input type="hidden" name="net[]" id="net.row_{{$index+1}}" 
+						            	value="{{old('net')[$index]}}">NET: {{old('net')[$index]}}<br/>
+										<input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
+							        	value="{{old('gross')[$index]}}">GROSS: {{old('gross')[$index]}}
+									</td>
+                                    <td>
+										<input type="hidden" name="invoice_value[]" id="invoice_value.row_{{$index+1}}" 
+							        	value="{{old('invoice_value')[$index]}}">{{$value->invoice_value}} {{@$Equipmentrequest->currency}}
+									</td>
                                     
 
                                     <td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
@@ -699,6 +712,9 @@
             var capacity = $("#capacity").val();
             var capvalue = $("#capvalue").val();
             var substance = $("#substance").val();
+            var net=$("#net").val();
+            var gross=$("#gross").val();
+            var invoice_value=$("#invoicevalue").val();
             var qu = $("input[name='iquality']:checked").val();
 
             if ($('#table_isubstance tbody').children(':last').attr("id")) {
@@ -726,6 +742,7 @@
             //  alert('already substance existing');
             // $('#add_isubstance').modal('hide');
             //}
+            
 
             //else{
             var markup =
@@ -747,18 +764,30 @@
                 "<input type='hidden' name='des[]' value='" + des + "'>" + des +
                 "</td>" +
 
+                
+
+                "<td>" +
+                "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue +
+                "</td>" +
                 "<td>" +
                 "<input type='hidden' name='capacity[]' value='" + capacity + "'>" + capacity +
                 "</td>" +
 
                 "<td>" +
-                "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue +
+                    "<input type='hidden' name='net[]' value='" + net + "'>" +net+ "</br>"+
+                    "<input type='hidden' name='gross[]' value='" + gross + "'>GROSS:" +gross+
                 "</td>" +
+                
+
+                "<td>"+
+		        	"<input type='hidden' name='invoice_value[]' value='"+invoice_value+"'>" +invoice_value+"USD"+
+			    "</td>"+
+
 
                 "<td>" +
                 "<input type='hidden' name='substance[]' value='" + substance + "'>" + substance +
                 "</td>" +
-
+                
                 "<td>" +
                 "<input type='hidden' name='quality[]' id='qu." + new_id + "' value='" + qu + "'>" + qu +
                 "</td>" +
