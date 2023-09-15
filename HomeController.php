@@ -1320,8 +1320,10 @@ class HomeController extends Controller
         $uom = Uom::all();
         $invoice_value=Iinvoice::all();
         return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
+        
     }
 
+    
     private function check_finish_equipment($customer_id)
     {
         $mrequest = Equipmentrequest::join('customers', 'equipmentrequests.customer_id', '=', 'customers.id')
