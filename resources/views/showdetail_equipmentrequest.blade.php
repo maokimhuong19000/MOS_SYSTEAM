@@ -295,13 +295,12 @@
                @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $equipment)
 			                  <tr>
 			                  	<td>{{($index+1)}}</td>
-                          
 			                    <td>{{$equipment->Equipment->taxcode}}{{$equipment->Equipment->product_name}}</td>
                           <td>{{$equipment->amount}}{{@$equipment->uom}}</td>
                           <td>{{$equipment->description}}</td>
                           <td>{{$equipment->capvalue}}{{$equipment->capacity}}</td>
 			                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>			                    
-			                    <td>{{@$equipment->invoice_value }} {{@$Equipmentrequest->currency}}</td>
+			                    <td>{{@$equipment->invoicevalue }} {{@$Equipmentrequest->currency}}</td>
                           <td>{{@$equipment->substance}} {{@$Equipmentrequest->substance}}</td>
                           <td>{{$equipment->quality}}</td>
 			                  </tr>
