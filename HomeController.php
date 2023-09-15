@@ -1320,7 +1320,6 @@ class HomeController extends Controller
         $uom = Uom::all();
         $invoice_value=Iinvoice::all();
         return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
-        
     }
 
     
