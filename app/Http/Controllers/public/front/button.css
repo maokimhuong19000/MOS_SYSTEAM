@@ -1,0 +1,31 @@
+ .btn-modal-close{
+  padding: 5px 20px 5px 20px !important;
+  background-color: #e74131 !important;
+  border-color: #e74131 !important;
+  box-shadow: 0 4px 2px -2px gray;
+  /*width: 30%;*/
+  font-size: 17px !important;
+  border-radius: none;
+  color: #fff;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  text-decoration: none;
+ } 
+.btn-modal-close:hover{
+  padding: 5px 20px 5px 20px !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: black !important;
+  box-shadow: 0 4px 2px -2px gray;
+  /*width:30%;*/
+  font-size: 17px !important;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  text-decoration: none;
+ }

@@ -1,0 +1,25 @@
+.modal-header{
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	background-color: #1767b3;
+	color: white;
+}
+#help p{
+	color: black
+}
+
+.tab-help li a{
+	background-color: lightblue
+}
+.tab-help li a:hover{
+	background-color: rgba(255,255,255,0.1);
+}
+.tab-help li.active a,.tab-help li.active a:focus, .tab-help li.active a:hover{
+	background-color:#0066ff;
+	color: white;
+	
+}
+.tab-help{
+
+	border-bottom: 5px solid #0066ff;
+}

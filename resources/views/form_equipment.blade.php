@@ -330,7 +330,7 @@
 									<th>{{trans('iequipment.capacity')}}</th>
 				        			<th>{{trans('iequipment.weight')}}</th>
 									<th>{{trans('iequipment.invoicevalue')}}</th>
-
+                                    <th>{{trans('iequipment.substance')}}</th>
 				        			<th>{{trans('isubstance.quanlity')}}</th>
 				        			<th><a id="remove" onclick="remove()" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></th>
 				        		</tr>
@@ -362,6 +362,7 @@
 							            	value="{{old('capvalue')[$index]}}">
 										</td>
 							         
+										<!-- addnew -->
 										
 										<td>
 											<input type="hidden" name="net[]" id="net.row_{{$index+1}}" 
@@ -370,10 +371,15 @@
 							            	value="{{old('gross')[$index]}}">GROSS: {{old('gross')[$index]}}
 										</td>
 										
-											<td><input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
-							            	value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}</td>
+										<td>
+											<input type="hidden" name="invoicevalue[]" id="invoicevalue.row_{{$index+1}}" 
+							            	value="{{old('invoicevalue')[$index]}}">{{old('invoicevalue')[$index]}}
+										</td>
 
-							          
+										<!-- addend -->
+
+										<td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
+
 							            <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" 
 							            	value="{{old('quality')[$index]}}">{{old('quality')[$index]}}</td>
 
@@ -470,16 +476,16 @@
 											<div class="col-xs-6">
 										<div class="form-group">
 			                              <span>{{trans('iequipment.net')}}</span><span class="star_require text-danger">*</span>
-			                              <input type="text" name="" class="form-control net" id="net" >
+			                              <input type="text" name="netweight" class="form-control net" id="netweight" value="netweight">
 			                            </div>
-</div>
-<div class="col-xs-6">
+										</div>
+										<div class="col-xs-6">
 										<div class="form-group">
 			                              <span>{{trans('iequipment.gross')}}</span><span class="star_require text-danger">*</span>
-			                              <input type="text" name="" class="form-control gross" id="gross" >
+			                              <input type="text" name="gross" class="form-control gross" id="gross" >
 			                            </div>
-</div>
-</div>
+										</div>
+										</div>
 
 
 										<div class="form-group">
@@ -500,10 +506,7 @@
 			                             <div class="form-group">
 							              <span>{{trans('isubstance.quanlity')}}</span><br/>
 
-							              <input type="radio" name="iquality" id="virgin" value="ថ្មី" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('iequipment.new')}} </span><br>
-
-							              
-
+							              <input type="radio" name="iquality" id="virgin" value="ថ្មី" checked>&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">{{trans('iequipment.new')}} </span><br>						            
 							              <input type="radio" name="iquality" id="both" value="ប្រើប្រាស់រួច">&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-info">{{trans('iequipment.used')}}</span><br>
 							            </div>
 
@@ -745,7 +748,7 @@
 
                     "<td>"+
                         "<input type='hidden' name='des[]' value='"+des+"'>"+des+
-						"<input type='hidden' name='substance[]' value='"+substance+"'>USE Substance: "+substance+
+					
                     "</td>"+
 
                     "<td>"+
@@ -763,8 +766,14 @@
 
 
 					"<td>"+
-			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+
+			            	"<input type='hidden' name='invoicevalue[]' id='invoicevalue."+new_id+"' value='"+invoicevalue+"'>" +invoicevalue+"USD"+
 			        "</td>"+
+
+
+					"<td>"+
+						"<input type='hidden' name='substance[]' value='"+substance+"'>"+substance+
+                    "</td>"+
+
 
                     "<td>"+
 			            	"<input type='hidden' name='quality[]' id='qu."+new_id+"' value='"+qu+"'>" +qu+

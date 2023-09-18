@@ -1,0 +1,101 @@
+
+a {
+  text-decoration: none;
+  color: #33747a;
+  -webkit-transition: color 0.15s ease-in;
+  -moz-transition: color 0.15s ease-in;
+  -o-transition: color 0.15s ease-in;
+  transition: color 0.15s ease-in;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus,
+li:focus {
+  outline: 0;
+}
+/*-----------------------------------------------------------------------------------*/
+/* Carousel */
+/*-----------------------------------------------------------------------------------*/
+.carousel-control {
+  background-image: none !important;
+  background: rgba(255, 255, 255, 0.4);
+  width: 34px;
+  border-radius: 50px;
+  font-size: 16px !important;
+  height: 34px;
+  margin-top: -20px;
+  top: 50%;
+  text-shadow: none;
+  opacity: 1;
+}
+.carousel-control:focus {
+  opacity: 0.5;
+}
+.carousel-control.left span,
+.carousel-control.icon-prev span,
+.carousel-control.right span,
+.carousel-control.icon-next span {
+  font-size: 20px;
+  margin-top: -10px;
+  color: rgba(0, 0, 0, 0.6);
+  display: block;
+}
+.carousel-control.left,
+.carousel-control.icon-prev {
+  left: 20px;
+}
+.carousel-control.right,
+.carousel-control.icon-next {
+  right: 20px;
+}
+.carousel-indicators {
+  bottom: 0;
+  right: 30px;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: auto;
+}
+.carousel.alternative {
+  margin-bottom: 30px;
+  padding: 0 40px 0px 40px;
+  margin-top: 30px;
+  /* Changes the position of the indicators */
+  /* Changes the colour of the indicators */
+}
+.carousel.alternative img {
+  padding: 4px;
+  background: #e6e6e6;
+  box-shadow: 0 0 1px #b3b3b3;
+}
+.carousel.alternative .carousel-control.left,
+.carousel.alternative .carousel-control.right {
+  background-image: none !important;
+  background-color: transparent;
+}
+.carousel.alternative .carousel-control.left span,
+.carousel.alternative .carousel-control.right span {
+  font-size: 18px;
+  background: #b3b3b3;
+  border-radius: 50%;
+  padding: 5px;
+}
+.carousel.alternative .carousel-control.left {
+  left: -12px;
+}
+.carousel.alternative .carousel-control.right {
+  right: -12px !important;
+}
+.carousel.alternative .carousel-indicators {
+  right: 50%;
+  top: auto;
+  bottom: -35px;
+  margin-right: -19px;
+}
+.carousel.alternative .carousel-indicators li {
+  background: #e6e6e6;
+}
+.carousel.alternative .carousel-indicators .active {
+  background: #b3b3b3;
+}

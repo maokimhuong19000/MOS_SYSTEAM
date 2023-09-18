@@ -280,12 +280,12 @@
                 </div>
                 <!-- ==================================== -->
                 <div class="panel panel-moe">
-    <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_isubstance.invoice_info')}}</span></div>
-    <div class="panel-body ">
+                <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_isubstance.invoice_info')}}</span></div>
+                <div class="panel-body ">
 
-	<div class="col-md-12">
-		<div class="col-md-4"> 
-		<div class="form-group">
+                <div class="col-md-12">
+                    <div class="col-md-4"> 
+                    <div class="form-group">
 	  		    				<span>{{trans('isubstance.incoterm')}}</span>
 	  		    				<span class="star_require text-danger">*</span>
 	  		    				<select name="incoterm" class="form-control">			
@@ -300,20 +300,20 @@
 						<div class="col-md-4"> 
 									<div class="form-group">
 	  		    				<span>{{trans('isubstance.billdate')}}</span>
-								  <span class="smtext"><input type="text" class="billdate form-control" name="billdate" id="d1" placeholder="datetime picker"></span>
+								  <span class="smtext"><input type="text" class="billdate form-control" name="billdate" id="dbill" value="{{$Equipmentrequest->billdate}}" placeholder="datetime picker"></span>
 							</div>
 						</div>	
 				<div class="col-md-4"> 
 									<div class="form-group">
 	  		    				<span>{{trans('isubstance.billnumber')}}</span>				  
-								<input type="text" class="  form-control" name="billnumber" > 
+								<input type="text" class="  form-control" name="billnumber" value="{{$Equipmentrequest->billnumber}}"> 
 							</div>
 				</div>
 
 		<div class="col-md-4"> 
 							<div class="form-group">
 	  		    				<span>{{trans('isubstance.invoicevalueother')}}</span>	  
-								<input type="text" class="form-control" name="invoice_value_other_currency" > 
+								<input type="text" class="form-control" name="invoice_value_other_currency" value="{{$Equipmentrequest->invoice_value_other_currency}}"> 
 							</div>
 		</div>
 
@@ -339,31 +339,24 @@
 		
 
 		<div class="col-md-4">
-	  						<div class="form-group" id="dfi_1">
+                            <div class="form-group" id="dfi_1">
 							    <span>{{trans('front_isubstance.File_Invioce')}}</span>
 							    <span class="star_require text-danger">*</span>
-							    <input type="file" name="file_invoice[]" class="form-control inv" id="fi_1">
+							    <input type="hidden" name="file_fi[]" value="{{$file->file_path}}">
+                                <a href="{{asset($file->file_path)}}" target="_blank"> <input type="button" value="View File" id="fi_{{$index+2}}" class="form-control invoice"></a>
 							    <div class="col-sm-12 " > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
 							</div>
-							
-							<div class=" text-right ">
-								<button type="button" class="btn btn-primary "  id="add_inv" >
-									<i class="glyphicon glyphicon-plus"></i>
-								</button>
-		                  	</div>
-		</div>
+                                <div class=" text-right ">
+                                    <button type="button" class="btn btn-primary " id="add_inv">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>
         </div>
-        </div>
-        </div>
-		
-	
-	
-              
-
-
-            
-
-
+    
                 <!-- ============================================== -->
                 <div class="panel panel-moe">
                     <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_iequipment.request_detail')}}</span></div>
@@ -385,11 +378,14 @@
                                     <th>#</th>
                                     <th>{{trans('iequipment.type')}}</th>
                                     <th>{{trans('isubstance.amount')}}</th>
-                                    <th>{{trans('iequipment.desc')}}</th>
-                                    <th>{{trans('iequipment.capacity_type')}}</th>
+                                    <th>{{trans('iequipment.desc')}}</th>                                    
                                     <th>{{trans('iequipment.capacity')}}</th>
+                                    <th>{{trans('iequipment.capacity_type')}}</th>
+                                    <th>{{trans('iequipment.weight')}}</th>
+                                    <th>{{trans('iequipment.invoicevalue')}}</th>
                                     <th>{{trans('iequipment.substance')}}</th>
                                     <th>{{trans('isubstance.quanlity')}}</th>
+                                    
                                     <th><a id="remove" onclick="remove()" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></th>
                                 </tr>
                             </thead>
@@ -399,14 +395,30 @@
                                 @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $value)
                                 <tr id="row_{{$index}}">
                                     <td class='order'>{{$index+1}}</td>
-                                    <td><input type='hidden' name='equipment_id[]' id='material_id.row_{{$index+1}}' value="{{$value->equipment_id}}">{{$value->Equipment->taxcode}}--{{$value->Equipment->product_name}}
+                                    <td><input type='hidden' name='equipment_id[]' id='material_id.row_{{$index+1}}' value="{{$value->equipment_id}}">{{$value->Equipment->taxcode}}{{$value->Equipment->product_name}}
                                     </td>
                                     <td> <input type="hidden" name="amount[]" value="{{$value->amount}}">{{$value->amount}}</td>
+                                    
+                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>  
 
-                                    <td><input type="hidden" name="des[]" id="store.row_{{$index+1}}" value="{{$value->description}}">{{$value->description}}</td>
+                                    
+                                    <td><input type="hidden" name="capvalue[]" id="number.row_{{$index+1}}" value="{{$value->capvalue}}">{{$value->capvalue}}</td>
 
                                     <td><input type="hidden" name="capacity[]" id="number.row_{{$index+1}}" value="{{$value->capacity}}">{{$value->capacity}}</td>
-                                    <td><input type="hidden" name="capvalue[]" id="number.row_{{$index+1}}" value="{{$value->capvalue}}">{{$value->capvalue}}</td>
+
+                                    <!-- noncomplete -->
+                                    
+                                    <td>
+										<input type="hidden" name="net[]" id="net.row_{{$index+1}}" 
+						            	value="{{old('net')[$index]}}">NET: {{old('net')[$index]}}<br/>
+										<input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" 
+							        	value="{{old('gross')[$index]}}">GROSS: {{old('gross')[$index]}}
+									</td>
+                                    <td>
+										<input type="hidden" name="invoice_value[]" id="invoice_value.row_{{$index+1}}" 
+							        	value="{{old('invoice_value')[$index]}}">{{$value->invoice_value}} {{@$Equipmentrequest->currency}}
+									</td>
+                                    
 
                                     <td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
                                     <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" value="{{$value->quality}}">{{$value->quality}}</td>
@@ -419,10 +431,6 @@
 
 
                         <!-- ========================pop up isubstance form ============================-->
-
-
-
-
 
                     </div>
                 </div>
@@ -480,7 +488,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+											<div class="col-xs-6">
+										<div class="form-group">
+			                              <span>{{trans('iequipment.net')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control net" id="net" >
+			                            </div>
+										</div>
+										<div class="col-xs-6">
+										<div class="form-group">
+			                              <span>{{trans('iequipment.gross')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control gross" id="gross" >
+			                            </div>
+										</div>
+										</div>
 
+
+										<div class="form-group">
+			                              <span>{{trans('iequipment.invoicevalue')}}</span><span class="star_require text-danger">*</span>
+			                              <input type="text" name="" class="form-control invoicevalue" id="invoicevalue" >
+			                            </div>
                                         <div class="form-group">
                                             <span>{{trans('iequipment.substance')}}</span><br />
                                             <select name="" class="form-control substance" id="substance">
@@ -489,7 +516,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-
+                                        
                                         <div class="form-group">
                                             <span>{{trans('isubstance.quanlity')}}</span><br />
 
@@ -539,6 +566,10 @@
         $('#d1').datepicker({
             format: "yyyy-mm-dd"
         });
+        $('#dbill').datepicker({
+                format: 'yy-mm-dd',  
+        });
+
 
 
         $("#purpose_of_use").change(function() {
@@ -685,6 +716,9 @@
             var capacity = $("#capacity").val();
             var capvalue = $("#capvalue").val();
             var substance = $("#substance").val();
+            var net=$("#net").val();
+            var gross=$("#gross").val();
+            var invoice_value=$("#invoicevalue").val();
             var qu = $("input[name='iquality']:checked").val();
 
             if ($('#table_isubstance tbody').children(':last').attr("id")) {
@@ -712,6 +746,7 @@
             //  alert('already substance existing');
             // $('#add_isubstance').modal('hide');
             //}
+            
 
             //else{
             var markup =
@@ -733,18 +768,30 @@
                 "<input type='hidden' name='des[]' value='" + des + "'>" + des +
                 "</td>" +
 
+                
+
+                "<td>" +
+                "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue +
+                "</td>" +
                 "<td>" +
                 "<input type='hidden' name='capacity[]' value='" + capacity + "'>" + capacity +
                 "</td>" +
 
                 "<td>" +
-                "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue +
+                    "<input type='hidden' name='net[]' value='" + net + "'>" +net+ "</br>"+
+                    "<input type='hidden' name='gross[]' value='" + gross + "'>GROSS:" +gross+
                 "</td>" +
+                
+
+                "<td>"+
+		        	"<input type='hidden' name='invoice_value[]' value='"+invoice_value+"'>" +invoice_value+"USD"+
+			    "</td>"+
+
 
                 "<td>" +
                 "<input type='hidden' name='substance[]' value='" + substance + "'>" + substance +
                 "</td>" +
-
+                
                 "<td>" +
                 "<input type='hidden' name='quality[]' id='qu." + new_id + "' value='" + qu + "'>" + qu +
                 "</td>" +

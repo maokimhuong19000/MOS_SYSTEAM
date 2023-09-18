@@ -1,0 +1,210 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Law;
+use App\Materialrequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Customer;
+use App\Quotarequest;
+use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\DataTables;
+use App\Quotarequestde_tail;
+use App\Quotarequestfile;
+use App\Material;
+use App\Comquota;
+use App\Qlicense;
+use App\Qldetail;
+use App\Paidq;
+use App\Aquota;
+use Hash;
+class ImportrequestController extends Controller
+{
+
+    
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:request.annualquota.assign',['only' =>['store']]);
+        $this->middleware('permission:request.annualquota.view',['only'=> ['AnnualQuota']]);
+    }
+    public function  AnnualQuota()
+    {
+    	return view('admin.importRequest.annualrequestquota');
+    }
+
+    public function get_datatable()
+    {
+        DB::statement(DB::raw('set @rownum=0'));
+    	$Customer = Quotarequest::join('customers', 'quotarequests.customer_id','=','customers.id')
+                ->join('quotarequestdetails', 'quotarequests.id','=','quotarequestdetails.quotarequest_id')
+                ->select( DB::raw('@rownum  := @rownum  + 1 AS rownum'),'quotarequests.id','quotarequests.created_at',DB::raw('sum(quotarequestdetails.amount) AS total')  ,'customers.company_name'   )
+                 ->groupBy('quotarequests.id','customers.company_name','quotarequests.created_at')
+              
+                ->orderBy('id', 'desc')->get();
+        return datatables::of($Customer)->make(true);
+    }
+
+
+    
+    public function showdetail($id)
+    {
+
+       $requestdetail=Quotarequest::with(['Quotarequestdetails.Material','Quotarequestfiles','Customer'])->find($id);
+    	return view('admin.importRequest.showdetail',compact('requestdetail'));
+
+
+    }
+
+    public function companyquota($id){
+
+        $requestdetail=Quotarequest::with(['Customer'])->find($id);
+        $year = $requestdetail->year;
+        $Result = Quotarequest::join('quotarequestdetails', 'quotarequests.id','=','quotarequestdetails.quotarequest_id')
+                ->join('materials', 'quotarequestdetails.material_id','=','materials.id')
+                ->leftjoin('aquotas', function($join) use ($year) {
+                                $join->on('aquotas.material_id','=','quotarequestdetails.material_id');
+                                $join->on('aquotas.year', '=', DB::raw($year));
+                              
+                            })
+                ->leftjoin('comquotas', 'aquotas.id','=','comquotas.aquota_id')
+               
+                ->select( 'quotarequestdetails.material_id',DB::raw('(quotarequestdetails.amount) AS total')  , 'materials.substance' , DB::raw('SUM(IFNULL(comquotas.amount,0)) AS comquota' ) , DB::raw('IFNULL(aquotas.amount,0) AS aquota' ) ,'aquotas.id' )
+                ->groupBy('aquotas.id','quotarequestdetails.material_id','quotarequests.year',  'materials.substance','aquotas.amount' ,'quotarequestdetails.amount' )   
+
+                ->where('quotarequests.customer_id', $requestdetail->customer_id)
+                ->where('quotarequests.year', $requestdetail->year)                 
+                ->get();
+
+        return view('admin.importRequest.companyquota',compact('Result','requestdetail'));
+                echo json_encode($Result);
+    }
+
+     public function store(Request $request,$id){
+
+                 // license database 
+                $Ql = new Qlicense();
+                $pad_length = 6;
+                $pad_char = 0;
+                $fee = 200000 ;
+
+              
+               $Ql->year =  $request->year; 
+               $Ql->customer_id =$request->customer_id;
+               $Ql->status = 1;
+               $Ql->save();
+                $str = str_pad($Ql->id, $pad_length, $pad_char, STR_PAD_LEFT);
+               $Ql->no = "ReqQ".$str ;
+                $Ql->save();
+               
+                $sub=[
+                'customer_id' => $request->customer_id,
+                'fee' => $fee,
+                'year' => $request->year 
+                ];
+               $Ql->Paidq()->Create($sub);
+
+                foreach ($request->qty as $key => $qty) {
+                if( $request['aquota_id'][$key]  ){
+                        $cf = Aquota::find($request['aquota_id'][$key]);
+
+                        $new = ['amount' => $qty, 'astatus'=>1 ];
+                        $old = ['customer_id' => $request->customer_id];
+                            
+                        $cf->comquotas()->updateOrCreate($old,$new);
+                        $subs = ['material_id' => $request['material_id'][$key],
+                             'amount' =>  $qty ];
+                        $Ql->qldetail()->Create($subs);
+                    }
+                   // echo $key; 
+                }
+
+//         $questrequest= new Quotareqreque;
+//         $questrequest->customer_id=Auth::id();
+         $requestq=Quotarequest::with(['Quotarequestdetails.Material','Quotarequestfiles','Customer'])->find($id);
+
+         $customer=Customer::find($request->customer_id);
+         $answer = "Request Quota Approved";
+         $title_kh ="សំនើសុំនាំកូតា ត្រូវបានអនុញ្ញាតិ / Request Quota Approved" ;
+
+         // payment database
+         Mail::send('emails.quota_approve',['requestdetail'=>$Ql,'requestq'=>$requestq,'answer'=> $answer,
+             'title'=>$title_kh],function
+         ($m) use ($customer)
+         {
+             $m->from('developer@cems10.com', "MOE Mail Auto System");
+             $m->to( $customer->email, $customer->name)->subject("Request Quota Approved");
+         });
+
+         return redirect()->action('AnnualQuotaController@index')->with('success', 'Quota Assign successfully !!');
+
+    }
+
+    private function convert_to_kh_number($string) {
+        // $num = range(0, 9);
+        $eng = ['1', '2', '3', '4', '5', '6', '7', '8', '9','0'];
+        $kh = ['១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩', '០'];
+
+
+        $persianNumbersOnly = str_replace($eng, $kh, $string);
+
+        return $persianNumbersOnly;
+    }
+    private function convert_to_kh_month($string) {
+        // $num = range(0, 9);
+        $eng = ['01', '02', '03', '04', '05', '06', '07', '08', '09','10','11','12'];
+        $kh = ['មករា', 'កុម្ភៈ', 'មីនា', 'មេសា', 'ឧសភា', 'មិថុនា' , 'កក្តដា', 'សីហា' , 'កញ្ញា', 'តុលា' , 'វិច្ឆកា' , 'ធ្នូ' ];
+
+
+        $persianNumbersOnly = str_replace($eng, $kh, $string);
+
+        return $persianNumbersOnly;
+    }
+//=================================Request==========================
+    public function qreq($id){
+
+
+        $requestdetail=Quotarequest::with(['Quotarequestdetails.Material','Quotarequestfiles','Customer'])->find($id);
+        $isub_date = strtotime($requestdetail->created_at);
+        $request_date["day"] = $this->convert_to_kh_number(date("d" ,$isub_date));
+        $request_date["month"] = $this->convert_to_kh_month(date("m",$isub_date));
+        $request_date["year"] = $this->convert_to_kh_number(date("Y",$isub_date));
+
+        $law = Law::find(1);
+
+        $year_show =  $this->convert_to_kh_number(date("Y"));
+        return view('admin.importRequest.qrequest',compact('requestdetail','customers','cominfos','law','year_show','city','request_date'));
+
+    }
+    //word
+    public function qrword($id){
+        $requestdetail=Quotarequest::with(['Quotarequestdetails.Material','Quotarequestfiles','Customer'])->find($id);
+        $law = Law::find(1);
+        $year_show = $this->convert_to_kh_number(date("Y"));
+        $isub_date = strtotime($requestdetail->created_at);
+        $request_date["day"] = $this->convert_to_kh_number(date("d" ,$isub_date));
+        $request_date["month"] = $this->convert_to_kh_month(date("m",$isub_date));
+        $request_date["year"] = $this->convert_to_kh_number(date("Y",$isub_date));
+
+
+        $content =  view('admin.importRequest.word',compact('requestdetail','law','year_show','request_date'))->render();
+
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        libxml_use_internal_errors(true);
+        $section = $phpWord->addSection();
+        $section->addText("");
+
+        \PhpOffice\PhpWord\Shared\Html::addHtml($section, $content, false, false);
+
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save(storage_path('quota.docx'));
+
+
+
+        return response()->download(storage_path('quota.docx'));
+
+    }
+
+}
