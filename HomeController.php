@@ -1422,6 +1422,9 @@ class HomeController extends Controller
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
+                $equitmentrequest->invoice_value = "";
+                $equitmentrequest->grossweight = "";
+                $equitmentrequest->netweight = "";
                 $equitmentrequest->manufacture_option = $request->purpose == 1 ? 1 : 0;
 
                 $equitmentrequest->aircon_service_option = $request->purpose == 2 ? 1 : 0;
@@ -1504,6 +1507,9 @@ class HomeController extends Controller
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
+                $equitmentrequest->invoice_value = "";
+                $equitmentrequest->grossweight = "";
+                $equitmentrequest->netweight = "";
                 $equitmentrequest->manufacture_option = $request->purpose == 1 ? 1 : 0;
 
                 $equitmentrequest->aircon_service_option = $request->purpose == 2 ? 1 : 0;
