@@ -628,7 +628,7 @@ class HomeController extends Controller
                     'number' => $value,
                     'quantity' => $request->total[$index],
                     'quality' => $request->quality[$index],
-                    'invoice_value' => $request->invoicevalue[$index] ?? 0,
+                    'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0,
                     'grossweight' => $request->gross[$index],
                     'uom' => $request->uom[$index],
 
@@ -742,7 +742,7 @@ class HomeController extends Controller
             ->orWhere('id', $isubdetail->from_country_id)
             ->orWhere('id', $isubdetail->manufacture_country_id)
             ->get();
-        
+
 
 
         $Equipmentrequest = Equipmentrequest::with(['Equipmentrequestdetail.Equipment', 'Port_Entries', 'Country', 'mCountry', 'Eladings', "Epackinglists", "Einvoices"])->find($id);
@@ -752,7 +752,7 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-        
+
         $exportPort = Portexport::where('country_id', 1)->get(); // Portexport::all(); //Portexport::where('country_id',1);
         //  return view('esubstance')->with(compact('isubdetail','entry','countries','met','Customer','Material','Customer','mcon_get','con_get'));
         return view('esubstance')->with(compact('isubdetail', 'entry', 'countries', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'exportPort', 'invoice_value', 'invoice_value_other_currency'));
@@ -770,10 +770,10 @@ class HomeController extends Controller
         $isubdetail->invoice_value = $request->invoice_value;
         $isubdetail->billnumber = $request->billnumber;
         $isubdetail->billdate = $request->billdate;
-        $isubdetail->currency= $request->currency;
-        $isubdetail->uom=$request->uom;
+        $isubdetail->currency = $request->currency;
+        $isubdetail->uom = $request->uom;
         $isubdetail->invoice_value_other_currency = $request->invoice_value_other_currency;
-        $isubdetail->Incoterm=$request->Incoterm;
+        $isubdetail->Incoterm = $request->Incoterm;
 
         $isubdetail->save();
         return redirect()->route('front.idata')->with('success', 'Update Successful!')->withInput();
@@ -836,12 +836,10 @@ class HomeController extends Controller
                     'self_usage_percent' => $request->input('self_usage_percent'),
                     'other_usage_percent' => $request->input('other_usage_percent'),
                     'other_info' => $request->input('other_info'),
-                    // 'invoice_value'=>$request->input('invoice_value'),
                     // ===============foreditinvoicestatement
-                    'billdate'=>date('y-m-d H:i:s',strtotime(request('billdate'))),
+                    'billdate' => date('y-m-d H:i:s', strtotime(request('billdate'))),
                     'billnumber' => $request->input('billnumber'),
-                    'currency'=>$request->input('currency'),
-//  'oum'=>$request->input('uom'), 
+                    'currency' => $request->input('currency'),
                     'invoice_value_other_currency' => $request->input('invoice_value_other_currency'),
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
@@ -868,15 +866,16 @@ class HomeController extends Controller
                             'store_type' => $request->store_type[$index],
                             'number' => $value,
 
-                            'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index]:"",
+                            'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0,
                             'billdate' => $request->billdate[$index],
-                            
+
                             // 'billnumber'=>$request->billnumber[$index] ? $request->billdate[$index]:0,
                             'invoice_value_other_currency' => $request->invoice_value_other_currency[$index] ? $request->invoice_value_other_currency[$index] : 0,
-                            'grossweight' => $request->gross[$index] ? $request->gross[$index]:0,
+                            'grossweight' => $request->gross[$index] ? $request->gross[$index] : 0,
                             'quantity' => $request->total[$index],
                             'uom' => $request->uom[$index] ?? "",
                             'quality' => $request->quality[$index],
+                            'Incoterm'=>$request->Incoterm[$index],
 
                         ];
 
@@ -1017,7 +1016,7 @@ class HomeController extends Controller
                                     'material_id' => $request->material_id[$index],
                                     'store_type' => $request->store_type[$index],
                                     'number' => $value,
-                                    'invoicevalue'=>$request->invoicevalue[$index],
+                                    'invoicevalue' => $request->invoicevalue[$index],
                                     'quantity' => $request->total[$index],
                                     'quality' => $request->quality[$index],
 
@@ -1286,7 +1285,7 @@ class HomeController extends Controller
             ->where('year', date('Y'))
             ->join('materials', 'materials.id', '=', 'aquotas.material_id')
             ->get();
-        
+
         $countries = Country::all();
         $Customer = Customer::find(Auth::id());
         $isubdetail = Materialrequest::with(['Materialrequestdetails.Material', 'Country', 'mCountry', 'Iladings', "Ipackinglists", "Iinvoices"])->find($id);
@@ -1319,9 +1318,11 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-        return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom'));
+        $invoice_value=Iinvoice::all();
+        return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
     }
 
+    
     private function check_finish_equipment($customer_id)
     {
         $mrequest = Equipmentrequest::join('customers', 'equipmentrequests.customer_id', '=', 'customers.id')
@@ -1357,8 +1358,9 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-        return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom')); //,'mcon_get','con_get'
-
+     
+        $invoice_value=Iinvoice::all();
+        return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom','invoice_value')); //,'mcon_get','con_get'
     }
 
 
@@ -1416,7 +1418,7 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-                $equitmentrequest->invoicevalue = "";
+                // $equitmentrequest->invoicevalue = "";
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
@@ -1453,7 +1455,12 @@ class HomeController extends Controller
                             'capacity' => $request->capacity[$index],
                             'substance' => $request->substance[$index],
                             'quality' => $request->quality[$index],
+                            'grosswright'=>$request->grossweight[$index] ?? 0,
+                            'invoice_value'=>$request->invoice_value[$index] ?? 0,
+                            'uom'=>$request->uom[$index] ? $request->uom[$index]:0,
                             'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
+                            'grossweight'=>$request->grossweight[$index] ? $request->grossweight[$index]:0,
+                            'netweight'=>$request->netweight[$index] ? $request->netweight[$index]:0,
                             'capvalue_data' => $valdata,
 
                         ];
@@ -1591,8 +1598,9 @@ class HomeController extends Controller
                                     'quality' => $request->quality[$index],
                                     'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
                                     'capvalue_data' => $valdata,
-                                    'invoice_value' => $request->invoicevalue[$index],
+                                    'invoicevalue' => $request->invoicevalue[$index],
                                     'grossweight' => $request->gross[$index],
+                                    'uom'=>$request->uom[$index],
                                     'netweight' => $request->net[$index],
 
                                 ];
@@ -1868,7 +1876,7 @@ class HomeController extends Controller
                     'quality' => $request->quality[$index],
                     'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
                     'capvalue_data' => $valdata,
-                    'invoice_value' => $request->invoicevalue[$index],
+                    'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0,
                     'grossweight' => $request->gross[$index],
                     'netweight' => $request->net[$index],
                     'uom' => $request->uom[$index],
@@ -1950,7 +1958,9 @@ class HomeController extends Controller
             if ($user->hasAnyPermission(24)) {
                 Mail::send(
                     'emails.equipmentreq',
-                    ['requestdetail' => $equitmentrequest, 'user' => $user,
+                    [
+                        'requestdetail' => $equitmentrequest,
+                        'user' => $user,
                     ],
                     function ($m) use ($user) {
                         $m->from('developer@cems10.com', "MOE Mail Auto System");
@@ -1980,7 +1990,6 @@ class HomeController extends Controller
         $entry = Port_Entry::all();
         $Equipmentrequest = Equipmentrequest::with(['Equipmentrequestdetail.Equipment', 'Port_Entries', 'Country', 'mCountry', 'Eladings', "Epackinglists", "Einvoices"])->find($id);
         return view('showdetail_equipmentrequest', compact('Equipmentrequest', "Customer"));
-
     }
 
 
@@ -2252,4 +2261,4 @@ class HomeController extends Controller
         echo json_encode($result);
     }
 
-}   
+}
