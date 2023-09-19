@@ -236,9 +236,6 @@ class HomeController extends Controller
     }
     public function eprofile()
     {
-
-
-
         $Customer = Customer::find(Auth::id());
         $Province = Province::all();
         $Province_get = Province::where("pro_name", "=", $Customer->city)->first();
@@ -875,7 +872,7 @@ class HomeController extends Controller
                             'quantity' => $request->total[$index],
                             'uom' => $request->uom[$index] ?? "",
                             'quality' => $request->quality[$index],
-                            'Incoterm'=>$request->Incoterm[$index],
+                            'Incoterm' => $request->Incoterm[$index],
 
                         ];
 
@@ -1318,11 +1315,11 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-        $invoice_value=Iinvoice::all();
-        return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
+        $invoice_value = Iinvoice::all();
+        return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom', 'invoice_value'));
     }
 
-    
+
     private function check_finish_equipment($customer_id)
     {
         $mrequest = Equipmentrequest::join('customers', 'equipmentrequests.customer_id', '=', 'customers.id')
@@ -1358,9 +1355,9 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-     
-        $invoice_value=Iinvoice::all();
-        return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom','invoice_value')); //,'mcon_get','con_get'
+
+        $invoice_value = Iinvoice::all();
+        return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'invoice_value')); //,'mcon_get','con_get'
     }
 
 
@@ -1418,13 +1415,10 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-                // $equitmentrequest->invoicevalue = "";
+                $equitmentrequest->invoicevalue = "";
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
-                $equitmentrequest->invoice_value = "";
-                $equitmentrequest->grossweight = "";
-                $equitmentrequest->netweight = "";
                 $equitmentrequest->manufacture_option = $request->purpose == 1 ? 1 : 0;
 
                 $equitmentrequest->aircon_service_option = $request->purpose == 2 ? 1 : 0;
@@ -1458,14 +1452,13 @@ class HomeController extends Controller
                             'capacity' => $request->capacity[$index],
                             'substance' => $request->substance[$index],
                             'quality' => $request->quality[$index],
-                            'grosswright'=>$request->grossweight[$index] ?? 0,
-                            'invoice_value'=>$request->invoice_value[$index] ?? 0,
-                            'uom'=>$request->uom[$index] ? $request->uom[$index]:0,
+                            'grosswright' => $request->grossweight[$index] ?? 0,
+                            'invoice_value' => $request->invoice_value[$index] ?? 0,
+                            'uom' => $request->uom[$index] ? $request->uom[$index] : 0,
                             'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
-                            'grossweight'=>$request->grossweight[$index] ? $request->grossweight[$index]:0,
-                            'netweight'=>$request->netweight[$index] ? $request->netweight[$index]:0,
+                            'grossweight' => $request->grossweight[$index] ? $request->grossweight[$index] : 0,
+                            'netweight' => $request->netweight[$index] ? $request->netweight[$index] : 0,
                             'capvalue_data' => $valdata,
-
                         ];
                         $equitmentrequest->Equipmentrequestdetail()->create($all_data);
 
@@ -1507,9 +1500,6 @@ class HomeController extends Controller
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
-                $equitmentrequest->invoice_value = "";
-                $equitmentrequest->grossweight = "";
-                $equitmentrequest->netweight = "";
                 $equitmentrequest->manufacture_option = $request->purpose == 1 ? 1 : 0;
 
                 $equitmentrequest->aircon_service_option = $request->purpose == 2 ? 1 : 0;
@@ -1606,7 +1596,7 @@ class HomeController extends Controller
                                     'capvalue_data' => $valdata,
                                     'invoicevalue' => $request->invoicevalue[$index],
                                     'grossweight' => $request->gross[$index],
-                                    'uom'=>$request->uom[$index],
+                                    'uom' => $request->uom[$index],
                                     'netweight' => $request->net[$index],
 
                                 ];
