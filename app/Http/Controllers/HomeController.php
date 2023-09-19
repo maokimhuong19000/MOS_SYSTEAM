@@ -236,9 +236,6 @@ class HomeController extends Controller
     }
     public function eprofile()
     {
-
-
-
         $Customer = Customer::find(Auth::id());
         $Province = Province::all();
         $Province_get = Province::where("pro_name", "=", $Customer->city)->first();
@@ -1418,7 +1415,7 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-                // $equitmentrequest->invoicevalue = "";
+                $equitmentrequest->invoicevalue = "";
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
@@ -1462,7 +1459,6 @@ class HomeController extends Controller
                             'grossweight' => $request->grossweight[$index] ? $request->grossweight[$index] : 0,
                             'netweight' => $request->netweight[$index] ? $request->netweight[$index] : 0,
                             'capvalue_data' => $valdata,
-
                         ];
                         $equitmentrequest->Equipmentrequestdetail()->create($all_data);
 
