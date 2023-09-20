@@ -276,12 +276,12 @@
                                     <td><input type="hidden" name="capacity[]" id="number.row_{{$index+1}}" value="{{$value->capacity}}">{{$value->capacity}}</td>
                                     <!-- noncomplete -->
                                     <td>
-                                        <input type="hidden" name="net[]" id="net.row_{{$index+1}}" value="{{old('net')[$index]}}">NET: {{old('net')[$index]}}<br />
-                                        <input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" value="{{old('gross')[$index]}}">GROSS: {{old('gross')[$index]}}
+                                        <input type="hidden" name="net[]" id="net.row_{{$index+1}}" value="{{$value->netweight}}">NET: {{$value->netweight}}<br />
+                                        <input type="hidden" name="gross[]" id="gross.row_{{$index+1}}" value="{{$value->grossweight}}">GROSS: {{$value->grossweight}}
                                     </td>
                                     <td>
-                                        <input type="hidden" name="invoice_value[]" id="invoice_value.row_{{$index+1}}" value="{{old('invoice_value')[$index]}}">{{$value->invoice_value}} {{@$Equipmentrequest->currency}}
-                                    </td>
+                                        <input type="hidden" name="invoice_value[]" id="invoice_value.row_{{$index+1}}" value="{{$value->invoice_value}}">{{$value->invoice_value}} USD
+									</td>
                                     <td><input type="hidden" name="substance[]" id="total.row_{{$index+1}}" value="{{$value->substance}}">{{$value->substance}}</td>
                                     <td><input type="hidden" name="quality[]" id="qu.row_{{$index+1}}" value="{{$value->quality}}">{{$value->quality}}</td>
                                     <td><input type="checkbox" name="record"></td>
@@ -495,7 +495,7 @@
             var substance = $("#substance").val();
             var net = $("#net").val();
             var gross = $("#gross").val();
-            var invoice_value = $("#invoicevalue").val();
+            var invoicevalue = $("#invoicevalue").val();
             var qu = $("input[name='iquality']:checked").val();
             if ($('#table_isubstance tbody').children(':last').attr("id")) {
                 var id = $('#table_isubstance tbody').children(':last').attr("id");
@@ -520,7 +520,58 @@
             // $('#add_isubstance').modal('hide');
             //}
             //else{
-            var markup = "<tr id='" + new_id + "'>" + "<td>" + (Number(id) + id) + "</td>" + "<td>" + "<input type='hidden' name='equipment_id[]' value='" + equitment + "'>" + $('#equitment option:selected').text() + "</td>" + "<td>" + "<input type='hidden' name='amount[]' value='" + amount + "'>" + amount + "<input type='hidden' class='subc'  name='sub[]' value='" + $('#equitment option:selected').text() + "' >" + "</td>" + "<td>" + "<input type='hidden' name='des[]' value='" + des + "'>" + des + "</td>" + "<td>" + "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue + "</td>" + "<td>" + "<input type='hidden' name='capacity[]' value='" + capacity + "'>" + capacity + "</td>" + "<td>" + "<input type='hidden' name='net[]' value='" + net + "'>" + net + "</br>" + "<input type='hidden' name='gross[]' value='" + gross + "'>GROSS:" + gross + "</td>" + "<td>" + "<input type='hidden' name='invoice_value[]' value='" + invoice_value + "'>" + invoice_value + "USD" + "</td>" + "<td>" + "<input type='hidden' name='substance[]' value='" + substance + "'>" + substance + "</td>" + "<td>" + "<input type='hidden' name='quality[]' id='qu." + new_id + "' value='" + qu + "'>" + qu + "</td>" + "<td>" + "<input type='checkbox' name='record'>" + "</td>" + "</tr>";
+            var markup =
+            
+                            "<tr id='" + new_id + "'>" +
+
+                            "<td>" + (Number(id) + id) + "</td>" +
+
+                            "<td>" +
+                                "<input type='hidden' name='equipment_id[]' value='" + equitment + "'>" + $('#equitment option:selected').text() +
+
+                            "</td>" +
+
+                            "<td>" +
+                                    "<input type='hidden' name='amount[]' value='" + amount + "'>" + amount +
+                                    "<input type='hidden' class='subc'  name='sub[]' value='" + $('#equitment option:selected').text() + "' >" +
+                            "</td>" +
+
+                            "<td>" +
+                                "<input type='hidden' name='des[]' value='" + des + "'>" + des +
+                            "</td>" +
+
+
+
+                            "<td>" +
+                                "<input type='hidden' name='capvalue[]' value='" + capvalue + "'>" + capvalue +
+                            "</td>" +
+                            "<td>" +
+                                "<input type='hidden' name='capacity[]' value='" + capacity + "'>" + capacity +
+                            "</td>" +
+
+                            "<td>" +
+                                "<input type='hidden' name='net[]' value='" + net + "'>" +net+ "</br>"+
+                                "<input type='hidden' name='gross[]' value='" + gross + "'>GROSS:" +gross+
+                            "</td>" +
+
+
+                            "<td>"+
+                                "<input type='hidden' name='invoice_value[]' value='"+invoice_value+"'>" +invoice_value+"USD"+
+                            "</td>"+
+
+
+                            "<td>" +
+                                "<input type='hidden' name='substance[]' value='" + substance + "'>" + substance +
+                            "</td>" +
+
+                            "<td>" +
+                                  "<input type='hidden' name='quality[]' id='qu." + new_id + "' value='" + qu + "'>" + qu +
+                            "</td>" +
+
+                            "<td>" +
+                                  "<input type='checkbox' name='record'>" +
+                            "</td>" +
+                            "</tr>";
             $('#table_isubstance tbody').append(markup);
             $('#add_isubstance').modal('hide');
             //}

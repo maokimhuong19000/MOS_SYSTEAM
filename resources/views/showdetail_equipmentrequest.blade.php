@@ -213,9 +213,9 @@
                                     <td>{{$equipment->amount}}{{@$equipment->uom}}</td>
                                     <td>{{$equipment->description}}</td>
                                     <td>{{$equipment->capvalue}}{{$equipment->capacity}}</td>
-                                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>
-                                    <td>{{@$equipment->invoicevalue}} {{@$Equipmentrequest->currency}}</td>
-                                    <td>{{@$equipment->substance}} {{@$Equipmentrequest->substance}}</td>
+                                    <td>NET:{{$equipment->netweight}}</br>GROSS:{{$equipment->grossweight}}</td>
+                                    <td>{{$equipment->invoice_value}}USD</td>
+                                    <td>{{@$equipment->substance}} {{@$Equipment->substance}}</td>
                                     <td>{{$equipment->quality}}</td>
                                 </tr> @endforeach </tbody>
                         </table>
