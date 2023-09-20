@@ -1355,7 +1355,6 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
-
         $invoice_value = Iinvoice::all();
         return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'invoice_value')); //,'mcon_get','con_get'
     }
@@ -1415,7 +1414,7 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-                // $equitmentrequest->invoicevalue = "";
+                // $equitmentrequest->invoice_value = "";
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
