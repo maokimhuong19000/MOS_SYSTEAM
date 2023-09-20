@@ -382,8 +382,6 @@
 
 							            	<td><input type="checkbox" name="record"></td>
 						            </tr>
-
-						           
 								@endforeach
 								@endif
 				        		
