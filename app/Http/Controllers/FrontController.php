@@ -12,6 +12,7 @@ use App\Customer;
 use App\Cominfo;
 use App\User;
 use Auth;
+use Symfony\Component\Console\Input\Input;
 
 class FrontController extends Controller
 {
