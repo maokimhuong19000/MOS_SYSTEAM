@@ -872,7 +872,11 @@ class HomeController extends Controller
                             'quantity' => $request->total[$index],
                             'uom' => $request->uom[$index] ?? "",
                             'quality' => $request->quality[$index],
+<<<<<<< HEAD
                             'Incoterm' => $request->Incoterm[$index],
+=======
+                            'Incoterm'=>$request->Incoterm[$index],
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
 
                         ];
 
@@ -1315,11 +1319,19 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
+<<<<<<< HEAD
         $invoice_value = Iinvoice::all();
         return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom', 'invoice_value'));
     }
 
 
+=======
+        $invoice_value=Iinvoice::all();
+        return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom','invoice_value'));
+    }
+
+    
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
     private function check_finish_equipment($customer_id)
     {
         $mrequest = Equipmentrequest::join('customers', 'equipmentrequests.customer_id', '=', 'customers.id')
@@ -1355,8 +1367,14 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
+<<<<<<< HEAD
         $invoice_value = Iinvoice::all();
         return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'invoice_value')); //,'mcon_get','con_get'
+=======
+     
+        $invoice_value=Iinvoice::all();
+        return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom','invoice_value')); //,'mcon_get','con_get'
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
     }
 
 
@@ -1415,7 +1433,11 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
+<<<<<<< HEAD
                 // $equitmentrequest->invoice_value = "";
+=======
+                // $equitmentrequest->invoicevalue = "";
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
@@ -1452,12 +1474,21 @@ class HomeController extends Controller
                             'capacity' => $request->capacity[$index],
                             'substance' => $request->substance[$index],
                             'quality' => $request->quality[$index],
+<<<<<<< HEAD
                             'grosswright' => $request->grossweight[$index] ?? 0,
                             'invoice_value' => $request->invoice_value[$index] ?? 0,
                             'uom' => $request->uom[$index] ? $request->uom[$index] : 0,
                             'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
                             'grossweight' => $request->gross[$index] ?? 0,
                             'netweight' => $request->net[$index] ?? 0,
+=======
+                            'grosswright'=>$request->grossweight[$index] ?? 0,
+                            'invoice_value'=>$request->invoice_value[$index] ?? 0,
+                            'uom'=>$request->uom[$index] ? $request->uom[$index]:0,
+                            'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
+                            'grossweight'=>$request->grossweight[$index] ? $request->grossweight[$index]:0,
+                            'netweight'=>$request->netweight[$index] ? $request->netweight[$index]:0,
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
                             'capvalue_data' => $valdata,
                         ];
                         $equitmentrequest->Equipmentrequestdetail()->create($all_data);
@@ -1596,7 +1627,11 @@ class HomeController extends Controller
                                     'capvalue_data' => $valdata,
                                     'invoicevalue' => $request->invoicevalue[$index],
                                     'grossweight' => $request->gross[$index],
+<<<<<<< HEAD
                                     'uom' => $request->uom[$index],
+=======
+                                    'uom'=>$request->uom[$index],
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
                                     'netweight' => $request->net[$index],
 
                                 ];
@@ -1874,7 +1909,11 @@ class HomeController extends Controller
                     
                     'capvalue' => $request->capvalue[$index] ? $request->capvalue[$index] : 0,
                     'capvalue_data' => $valdata,
+<<<<<<< HEAD
                     'invoice_value' => $request->invoicevalue[$index] ? $request->invoicevalue[$index] : 0,
+=======
+                    'invoice_value' => $request->invoice_value[$index] ? $request->invoice_value[$index] : 0,
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
                     'grossweight' => $request->gross[$index],
                     'netweight' => $request->net[$index],
                     'uom' => $request->uom[$index],
