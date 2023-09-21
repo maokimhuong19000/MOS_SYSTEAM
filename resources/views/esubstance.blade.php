@@ -327,7 +327,7 @@
 	  		    				<span class="star_require text-danger">*</span>
 	  		    				<select name="incoterm" class="form-control">			
 								  @foreach($cif as $ic)
-							      	<option  value="{{$ic->code}}"  {{ (old('incoterm') == $ic->code? "selected":"" )}}>
+							      	<option  value="{{$isubdetail->incoterm}}"  {{ (old('incoterm') == $ic->code? "selected":"" )}}>
 										{{$ic->code}} </option>
 							      	@endforeach
  

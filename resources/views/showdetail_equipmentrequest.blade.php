@@ -231,6 +231,117 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="col-md-4"> 
+                      <div class="form-group">
+                            <span>{{trans('isubstance.billnumber')}}</span>				  
+                        <input type="text" disabled="disabled" class="  form-control" name="billnumber" value="{{$Equipmentrequest->billnumber}}"> 
+                      </div>
+            </div>
+
+            <div class="col-md-4"> 
+                      <div class="form-group">
+                            <span>{{trans('isubstance.invoicevalueother')}}</span>	  
+                        <input type="text" value="{{$Equipmentrequest->invoice_value_other_currency}}" class="form-control" name="invoice_value_other_currency"  disabled="disabled"> 
+                      </div>
+            </div>
+
+            <div class="col-md-4"> 
+                      <div class="form-group">
+                            <span>{{trans('isubstance.currency')}}</span>
+                          
+                    <input type="text" disabled="disabled" name="currency" value="{{$Equipmentrequest->currency}}" class="form-control">
+                      </div>
+            </div>
+
+            <div class="col-md-4"> 
+            <div class="form-group">
+                            <span>{{trans('isubstance.exchangerate')}}</span>
+                <input type="text" disabled="disabled" class="  form-control" name="exchange_rate"   value="{{$Equipmentrequest->exchange_rate}}"> 
+            </div>
+            </div>
+
+            <div class="col-md-4">
+                  
+                  <div class="form-group">
+                    <label>{{trans('front_isubstance.File_Invioce')}}</label><br>
+                    @foreach($Equipmentrequest->Einvoices as $ind => $file)
+                    <a href="{{asset($file->file_path)}}" target="_blank"> <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a><br/>
+                    @endforeach
+                  </div>
+              </div>
+
+              </div>
+    </div>
+  </div>
+  <div class="panel panel-moe">
+    <div class="panel-heading"><span class="content_bottom_font_sm">{{trans('front_iequipment.request_detail')}}</span></div>
+    <div class="panel-body">
+    <div id="" class="mtable">
+    <table id="ManageTable" class="table  table-bordered" style="width:100%">
+            <thead>
+
+                    <tr>
+                			<th >#</th>
+                      <th>{{trans('iequipment.type')}}</th>
+                      <th>{{trans('isubstance.amount')}}</th>
+			                <th>{{trans('iequipment.desc')}}</th>		
+                      <th>{{trans('iequipment.capacity')}}</th>
+                      <th>{{trans('iequipment.weight')}}</th>
+									    <th>{{trans('iequipment.invoicevalue')}}</th>
+                      <th>{{trans('iequipment.substance')}}</th>
+                      <th>{{trans('isubstance.quanlity')}}</th>
+                    </tr>
+            </thead>
+
+            <tbody>
+               @foreach($Equipmentrequest->Equipmentrequestdetail as $index => $equipment)
+			                  <tr>
+			                  	<td>{{($index+1)}}</td>
+			                    <td>{{$equipment->Equipment->taxcode}}{{$equipment->Equipment->product_name}}</td>
+                          <td>{{$equipment->amount}}{{@$equipment->uom}}</td>
+                          <td>{{$equipment->description}}</td>
+                          <td>{{$equipment->capvalue}}{{$equipment->capacity}}</td>
+			                    <td>{{@$equipment->netweight}}KG <br>{{@$equipment->grossweight}}KG</td>			                    
+			                    <td>{{@$equipment->invoice_value }} {{@$Equipmentrequest->currency}}</td>
+                          <td>{{@$equipment->substance}} {{@$Equipmentrequest->substance}}</td>
+                          <td>{{$equipment->quality}}</td>
+			                  </tr>
+			                  @endforeach
+
+            </tbody>
+        </table>
+    </div>
+                
+
+         <div class="form-group">
+           
+
+         </div>
+
+         @if ($Equipmentrequest->import_status >= 2 )
+       
+            <div class="form-group">
+              
+                  <span>{{trans('front_isubstance.file_department')}}</span>
+                 
+                 
+              </div>
+
+      
+         @endif
+
+
+         <div class="col-sm-6 "></div>
+    <div class="col-sm-6 ">
+        <div class="text-right">
+
+          <a href="{{route('front.idata')}}" class="btn btn-primary btn-lg">Back</a>
+          @if($Equipmentrequest->import_status < 2)
+          <a href="{{route('front.update_equipment',$Equipmentrequest->id)}}" class="btn btn-success btn-lg">កែប្រែ/Edit</a>
+          @endif
+>>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
         </div>
     </div>
 </div> @endsection @section('script') <script type="text/javascript">
