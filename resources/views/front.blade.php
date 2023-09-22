@@ -21,27 +21,25 @@
                     </a>
                     </div>
                     
-                                                        <div class="item">
-                                        <a href="" target="_blank">    
+                    <div class="item">
+                     <a href="" target="_blank">    
                         <img src="{{asset('front/img/a2.jpg')}}">
                     </a>
                     </div>
                     
-                                                        <div class="item">
-                                        <a href="" target="_blank">    
+                    <div class="item">
+                    <a href="" target="_blank">    
                         <img src="{{asset('front/img/a3.jpg')}}">
                     </a>
-                    </div>
-                    
-                                                        
-                    
-                                </div>
+                </div>
+
+                </div>
                 <ol class="carousel-indicators">
-                                                        <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-                                                        <li data-target="#carousel-example" data-slide-to="1" class=""></li>
-                                                        <li data-target="#carousel-example" data-slide-to="2" class=""></li>
+                    <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example" data-slide-to="1" class=""></li>
+                    <li data-target="#carousel-example" data-slide-to="2" class=""></li>
                                                         
-                                                    </ol>
+                </ol>
                             <!-- End Carousel Controls -->
         </div>
         <!-- End Carousel Slideshow -->
@@ -49,20 +47,14 @@
    
 </div>
 
-
-
-</div></div>
-
-
-
-
+</div>
+</div>
             <div class="container" style="display: none">
                 <div class="content_top col-sm-12 padding_top">
                     <center>
                         <div class="padding-top-xs">
                             <div class="content_bottom_font padding-sm"><b>និតិវិធីដើម្បី សុំនាំចូល ផលិតផល/សារធាតុបំផ្លាញស្រទាប់អូហ្សូន</b></div>
                         </div>
-                       
                     </center>
                     <div class="col-sm-12 padding-top-lg-extra">
                         <div class="col-sm-4">
@@ -77,14 +69,10 @@
                                     <img src="{{asset('front/img/account picto.svg')}}" class="icon_step images-full">
                                 <!--<![endif]-->
                                 
-                                <div class="content_title_sm padding-top-xs padding-bottom-sm">1. បំពេញពាក្យសុំនាំជាក្រុហ៊ុននាំចូលនៅក្រសួងបរិស្ថាន</div>
-                               
-                                
-                                                      
+                                <div class="content_title_sm padding-top-xs padding-bottom-sm">1. បំពេញពាក្យសុំនាំជាក្រុហ៊ុននាំចូលនៅក្រសួងបរិស្ថាន</div>                        
                             </center><ul>
                                     <li>សូមអញ្ចើញមកកាន់នាយកដា្នានគាំពាបរិស្ថាន</li>
-                                    <li>បំពេញពាក្យសុំ បង្កើត Account </li>
-                                   
+                                    <li>បំពេញពាក្យសុំ បង្កើត Account </li>      
                                 </ul>     
                         </div>
                         <div class="col-sm-4">
@@ -104,7 +92,7 @@
                                 
                             </center><ul>
                                     
-                                    <li>Account សម្រាប់ចូលប្រពន្ធដើម្បីស្នើសុំ</li>
+                                <li>Account សម្រាប់ចូលប្រពន្ធដើម្បីស្នើសុំ</li>
                                  <li>បំពញ ព័តមានក្រុមហ៊ុនឲ្យបានពេញលេញ </li>
                                 </ul>    
                         </div>
@@ -159,13 +147,13 @@
 </ol>                           </div>
                                 
                             
-                            <div class="content-home">
+                <div class="content-home">
                             <center>
                            </div>
                             
                             </div>
                         </div>
-                                                <div class="col-sm-6 col-md-6 col-xs-12 padding-bottom-md padding_h_xs">
+                <div class="col-sm-6 col-md-6 col-xs-12 padding-bottom-md padding_h_xs">
                             
                             <div class="content-body col-xs-12 padding_h_xs bg_defaut">
                             <div style="text-align: center;" class="content_title_md padding-top-md padding-bottom-md">Related Documnets </div>
@@ -180,14 +168,11 @@
     <li>zzzzz.</li>
 </ul>       </div>                      
                             
-                            <div class="content-home">
-                            </div>
-                            
-                            </div>
-                        </div>
-
-
-                                    </div>
+        <div class="content-home">
+            </div>      
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
 @endsection
