@@ -349,9 +349,6 @@ $('#table_total_year').DataTable({
 
             }); 
 }
-
-
-
 function equ_report(year,from,to){
 
     var currentYear = new Date().getFullYear();  
@@ -380,12 +377,8 @@ $('#table_total_year_e').DataTable({
                       "render": function ( data, type, full, meta ) {
                             
                                 return  formatNumber(parseFloat(full.total).toFixed(0))  ; 
-
                             }
-                    },
-                    
-                   
-                    
+                    },  
                     ],
         "pagingType": "full_numbers",
         "order": [[ 0, "desc" ]],
@@ -414,9 +407,6 @@ $('#table_total_year_e').DataTable({
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0 );
-            
-           
-           
             $(api.column(5).footer()).html('<b>'+total_amount.toFixed(0)+'<b/>');
             $(api.column(3).footer()).text('Total'); 
          //   alert(total_amount);
@@ -425,9 +415,7 @@ $('#table_total_year_e').DataTable({
 
 
         },
-       
-
-            }); 
+        }); 
 }
 
 function qreport(year){
