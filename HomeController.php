@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Response;
 use App\Einvoice;
 use App\Elading;
 use App\Epackinglist;
@@ -71,8 +71,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front');
+        return view('front');   
     }
+    
 
 
 
@@ -121,8 +122,6 @@ class HomeController extends Controller
 
     public function reporte()
     {
-
-
         $year = @$_GET['year'] ? $_GET['year'] : date('Y');
         $from = @$_GET['from'] ? date("Y-m-d H:i:s", strtotime($_GET['from'])) : date('Y-m-d');
         $to = @$_GET['to'] ? date("Y-m-d H:i:s", strtotime($_GET['to'])) : date('Y-m-d');
@@ -838,6 +837,7 @@ class HomeController extends Controller
                     'billnumber' => $request->input('billnumber'),
                     'currency' => $request->input('currency'),
                     'invoice_value_other_currency' => $request->input('invoice_value_other_currency'),
+                    'incoterm'=>$request->input('incoterm'),
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
                     'address' => $request->input('address'),
@@ -872,7 +872,10 @@ class HomeController extends Controller
                             'quantity' => $request->total[$index],
                             'uom' => $request->uom[$index] ?? "",
                             'quality' => $request->quality[$index],
+
                             'Incoterm' => $request->Incoterm[$index],
+
+
 
                         ];
 
@@ -918,6 +921,7 @@ class HomeController extends Controller
                     'self_usage_percent' => $request->input('self_usage_percent'),
                     'other_usage_percent' => $request->input('other_usage_percent'),
                     'other_info' => $request->input('other_info'),
+                    
                     'place_import' => $request->input('place_import'),
                     'place_export' => $request->input('place_export'),
                     'address' => $request->input('address'),
@@ -1315,9 +1319,14 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
+
         $invoice_value = Iinvoice::all();
         return view('form_equipment', compact('entry', 'countries', 'equitment', 'Customer', 'Material', 'exportPort', 'transport', 'cif', 'currency', 'uom', 'invoice_value'));
     }
+
+
+
+ 
 
 
     private function check_finish_equipment($customer_id)
@@ -1357,9 +1366,12 @@ class HomeController extends Controller
         $uom = Uom::all();
         $invoice_value = Iinvoice::all();
         return view('uequipment', compact('countries', 'equitment', 'entry', 'Customer', 'Material', 'Equipmentrequest', 'transport', 'cif', 'currency', 'uom', 'invoice_value')); //,'mcon_get','con_get'
+        
+
     }
+  
 
-
+    
     public function uequipment(Request $request, $id)
     {
         // dd($request->all());
@@ -1415,13 +1427,22 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-                // $equitmentrequest->invoice_value = "";
+// <<<<<<< HEAD
+//                 // $equitmentrequest->invoice_value = "";
+// =======
+//                 // $equitmentrequest->invoicevalue = "";
+// >>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";
                 $equitmentrequest->manufacture_option = $request->purpose == 1 ? 1 : 0;
 
                 $equitmentrequest->aircon_service_option = $request->purpose == 2 ? 1 : 0;
+                $equitmentrequest->billdate=$request->billdate;
+                $equitmentrequest->billnumber=$request->billnumber;
+                $equitmentrequest->invoice_value_other_currency=$request->invoice_value_other_currency;
+                $equitmentrequest->currency=$request->currency;
+                $equitmentrequest->incoterm=$request->incoterm;
 
                 $equitmentrequest->other_option = $request->purpose == 3 ? 1 : 0;
                 $equitmentrequest->other_option_description = $request->other_option_description;
@@ -1452,6 +1473,10 @@ class HomeController extends Controller
                             'capacity' => $request->capacity[$index],
                             'substance' => $request->substance[$index],
                             'quality' => $request->quality[$index],
+                            'billdate' => date('y-m-d H:i:s', strtotime(request('billdate'))),
+                            'billnumber' => $request->input('billnumber'),
+                            'currency' => $request->input('currency'),
+                            'invoice_value_other_currency' => $request->input('invoice_value_other_currency'),
                             'grosswright' => $request->grossweight[$index] ?? 0,
                             'invoice_value' => $request->invoice_value[$index] ?? 0,
                             'uom' => $request->uom[$index] ? $request->uom[$index] : 0,
@@ -1475,6 +1500,7 @@ class HomeController extends Controller
                     'manufacture_name.required' => 'សូមបញ្ចូលឈ្មោះក្រុមហ៊ុនដែលនាំចេញ/Please Input Export Company',
                 ]
             );
+            
             if (!$validatedData) {
                 return \Redirect::back()->withErrors($validatedData)->withInput();
 
@@ -1596,7 +1622,9 @@ class HomeController extends Controller
                                     'capvalue_data' => $valdata,
                                     'invoicevalue' => $request->invoicevalue[$index],
                                     'grossweight' => $request->gross[$index],
+
                                     'uom' => $request->uom[$index],
+
                                     'netweight' => $request->net[$index],
 
                                 ];
@@ -1889,7 +1917,6 @@ class HomeController extends Controller
                 }
             }
         }
-
         foreach ($request->file('file_shipping') as $index => $image) {
 
             if (isset($image)) {
