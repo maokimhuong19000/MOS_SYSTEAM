@@ -25,18 +25,22 @@
         		<li class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="" onclick="">
 				&nbsp;<img style="max-width: 20px; bottom:1px" src="{{asset('front/img/home.png')}}">&nbsp;
 				
-		</a></li>
+		</a>
+	</li>
 				<li id="idlogin" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('cust.auth.login')}}" onclick="">
 						{{trans('front.import_request')}}
-			</a></li>
+			</a>
+	</li>
 
 						<li id="" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="http://www.moe.gov.kh/" onclick="">
 						 {{trans('front.moe_menu')}}
-			</a></li>
+			</a>
+	</li>
 
 						<li id="" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="http://epa.moe.gov.kh/" onclick="">
 						 {{trans('front.epa_menu')}}
-			</a></li>
+			</a>
+		</li>
 	
 		      </ul>
       
@@ -57,22 +61,23 @@
 		<ul class="menu ">
 			<li class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="" onclick="">
 				&nbsp;<img style="max-width: 20px; bottom:1px" src="{{asset('front/img/home.png')}}">&nbsp;
-				
-		</a></li>
+			
+			</a>
+		</li>
 			<li id="idlogin" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('cust.auth.login')}}" onclick="">
 						{{trans('front.import_request')}}
-			</a></li>
+			</a>
+		</li>
 
 						<li id="" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="http://www.moe.gov.kh/" onclick="">
 						 {{trans('front.moe_menu')}}
-			</a></li>
+			</a>
+		</li>
 
 						<li id="" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="http://epa.moe.gov.kh/" onclick="">
 						 {{trans('front.epa_menu')}}
-			</a></li>
-
-
-			
+			</a>
+		</li>
 		</ul>
 	</div>
 </div>

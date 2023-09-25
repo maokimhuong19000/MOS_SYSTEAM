@@ -74,14 +74,14 @@ Route::group( ['middleware' => ['web','auth:customer']], function () {
     Route::get('idata', 'HomeController@idata' )->name('front.idata'); 
     Route::get('idata/getdatatables','HomeController@get_datatable')->name('idata.getdatatables');
     Route::get('idata/{id}/showrquest_cust','HomeController@showrequestall')->name('idata.showrquest_cust');
-    // Route Update Substance
+// Route Update Substance
     Route::put('usubstance/{id}','HomeController@usubstance')->name('front.usubstance');
     Route::put('usub/{id}','HomeController@usub')->name('front.usub');
     Route::get('isubstance/{id}/esubstance','HomeController@esubstance')->name('isubstance.esubstance');
     Route::get('delete/{id}/esubstance','HomeController@dele_sub')->name('delete.esubstance');
    
    
-       Route::post('asubstance/{id}/add_new','HomeController@add_new')->name('asubstance.add_new');
+    Route::post('asubstance/{id}/add_new','HomeController@add_new')->name('asubstance.add_new');
     Route::post('delete/{id}/del_ship','HomeController@del_ship')->name('delete.del_ship');
     Route::get('isubstance','HomeController@isubstance')->name('front.isubstance');
     Route::get('findeSubstance','HomeController@findeSubstance')->name('findeSubstance');
@@ -100,16 +100,16 @@ Route::group( ['middleware' => ['web','auth:customer']], function () {
    
    
     // route update eqe
-       Route::put('equipment/{id}/update','HomeController@uequipment')->name('equipment.update');
-       Route::get('front/{id}/update_equipment','HomeController@update_equipment')->name('front.update_equipment');
-       Route::get('delete/{id}/del_equ','HomeController@del_equ')->name('delete.del_equ');
-   
+    Route::put('equipment/{id}/update','HomeController@uequipment')->name('equipment.update');
+    Route::get('front/{id}/update_equipment','HomeController@update_equipment')->name('front.update_equipment');
+    Route::get('delete/{id}/del_equ','HomeController@del_equ')->name('delete.del_equ');
+
    
    
     Route::get('front/reportq','HomeController@reportq')->name('front.reportq');
     Route::get('front/reportm','HomeController@reportm')->name('front.reportm');
     Route::get('front/reporte','HomeController@reporte')->name('front.reporte');
-     Route::get('about', 'HomeController@about' )->name('front.front');;
+    Route::get('about', 'HomeController@about' )->name('front.front');;
    
     Route::patch('front/resetpwd','HomeController@resetpwd')->name('front.resetpwd');
     Route::get('template', 'HomeController@template' )->name('front.template');
@@ -143,8 +143,8 @@ Route::group(['prefix' => \UriLocalizer::localeFromRequest(1) , 'middleware' => 
        Route::get('index','ArticleController@index')->name('article.index');
        Route::get('article/disable/{id}', 'ArticleController@enable')->name('article.enable');
        Route::get('article/enable/{id}', 'ArticleController@disable')->name('article.disable');
-   //    Route::get('article/{id}/edit', 'ArticleController@edit')->name('article.edit');
-   //    Route::post('article/{id}/update', 'ArticleController@update')->name('article.update');
+   //  Route::get('article/{id}/edit', 'ArticleController@edit')->name('article.edit');
+   //  Route::post('article/{id}/update', 'ArticleController@update')->name('article.update');
        Route::resource('article','ArticleController');
    
        //priceController
@@ -183,10 +183,10 @@ Route::group(['prefix' => \UriLocalizer::localeFromRequest(1) , 'middleware' => 
    
        Route::get('register/detail/{id}','RegisterController@Detail')->name('register.detail');
        Route::get('register/getdatatables','RegisterController@getdatatables')->name('register.getdatatables');
-        Route::get('register/getimport/{id}','RegisterController@get_import')->name('register.get_import');
-        Route::get('register/getsubstance/{id}','RegisterController@get_substance')->name('register.get_substance');
-        Route::get('register/getequipmetn/{id}','RegisterController@get_equipment')->name('register.get_equipment');
-        Route::get('register/getquota/{id}','RegisterController@get_quota')->name('register.get_quota');
+       Route::get('register/getimport/{id}','RegisterController@get_import')->name('register.get_import');
+       Route::get('register/getsubstance/{id}','RegisterController@get_substance')->name('register.get_substance');
+       Route::get('register/getequipmetn/{id}','RegisterController@get_equipment')->name('register.get_equipment');
+       Route::get('register/getquota/{id}','RegisterController@get_quota')->name('register.get_quota');
        Route::get('register/enable/{id}','RegisterController@enable')->name('register.enable');
        Route::get('register/{id}/editp','RegisterController@editp')->name('register.editp');
        Route::patch('register/updatep/{id}','RegisterController@updatep')->name('register.updatep');
@@ -228,12 +228,12 @@ Route::group(['prefix' => \UriLocalizer::localeFromRequest(1) , 'middleware' => 
    
        Route::get('report/isubstancebycompany','ReportController@isubstanceByCompany')->name('report.isubstanceByCompany');
        Route::get('report/isubstancebycompanybyyear','ReportController@getIsubstanceByCompanyYear')->name('report.getIsubstanceByCompany.year');
-        Route::get('report/isubstancebycompanybyfilter','ReportController@getIsubstanceByCompanyFilter')->name('report.getIsubstanceByCompany.filter');
-        Route::get('report/getdatatabledymaniccolumn','ReportController@getDatatableDymaniccolumn')->name('report.isubtancebycompany.column');
+       Route::get('report/isubstancebycompanybyfilter','ReportController@getIsubstanceByCompanyFilter')->name('report.getIsubstanceByCompany.filter');
+       Route::get('report/getdatatabledymaniccolumn','ReportController@getDatatableDymaniccolumn')->name('report.isubtancebycompany.column');
    
        Route::get('report/isubstancebyport','ReportController@isubstanceByPort')->name('report.isubstanceByPort');
        Route::get('report/isubstancebyportbyyear','ReportController@getIsubstanceByPortYear')->name('report.getIsubstanceByPort.year');
-        Route::get('report/isubstancebyportbyfilter','ReportController@getIsubstanceByPortFilter')->name('report.getIsubstanceByPort.filter');
+       Route::get('report/isubstancebyportbyfilter','ReportController@getIsubstanceByPortFilter')->name('report.getIsubstanceByPort.filter');
    
        Route::get('report/isubstancebycountry','ReportController@isubstanceByCountry')->name('report.isubstanceByCountry');
        Route::get('report/isubstancebycountrybyyear','ReportController@getIsubstanceByCountryYear')->name('report.getIsubstanceByCountry.year');
@@ -255,14 +255,14 @@ Route::group(['prefix' => \UriLocalizer::localeFromRequest(1) , 'middleware' => 
    
        /// equipment report
    
-        Route::get('report/iequipmentbycompany','ReporteController@iequipmentByCompany')->name('report.iequipmentByCompany');
+       Route::get('report/iequipmentbycompany','ReporteController@iequipmentByCompany')->name('report.iequipmentByCompany');
        Route::get('report/iequipmentbycompanybyyear','ReporteController@getiequipmentByCompanyYear')->name('report.getiequipmentByCompany.year');
-        Route::get('report/iequipmentbycompanybyfilter','ReporteController@getiequipmentByCompanyFilter')->name('report.getiequipmentByCompany.filter');
+       Route::get('report/iequipmentbycompanybyfilter','ReporteController@getiequipmentByCompanyFilter')->name('report.getiequipmentByCompany.filter');
        // Route::get('report/getdatatabledymaniccolumn','ReporteController@getDatatableDymaniccolumn')->name('report.isubtancebycompany.column');
    
        Route::get('report/iequipmentbyport','ReporteController@iequipmentByPort')->name('report.iequipmentByPort');
        Route::get('report/iequipmentbyportbyyear','ReporteController@getiequipmentByPortYear')->name('report.getiequipmentByPort.year');
-        Route::get('report/iequipmentbyportbyfilter','ReporteController@getiequipmentByPortFilter')->name('report.getiequipmentByPort.filter');
+       Route::get('report/iequipmentbyportbyfilter','ReporteController@getiequipmentByPortFilter')->name('report.getiequipmentByPort.filter');
    
        Route::get('report/iequipmentbycountry','ReporteController@iequipmentByCountry')->name('report.iequipmentByCountry');
        Route::get('report/iequipmentbycountrybyyear','ReporteController@getiequipmentByCountryYear')->name('report.getiequipmentByCountry.year');
@@ -354,18 +354,19 @@ Route::group(['prefix' => \UriLocalizer::localeFromRequest(1) , 'middleware' => 
        Route::get('/entry/disable/{id}','PortEntryController@disable')->name('entry.disable');
        Route::resource('/entry','PortEntryController');
        
-      Route::get('/api/log' , 'ApiController@log');
-      Route::get('/api/send/{id}' , 'ApiController@send');
-      Route::get('/api/viewjson/{id}' , 'ApiController@viewjson');
-      Route::get('/api/get/{id}' , 'ApiController@get');
-      Route::get('/api/cancel/{id}' , 'ApiController@cancel');
+       Route::get('/api/log' , 'ApiController@log');
+       Route::get('/api/send/{id}' , 'ApiController@send');
+       Route::get('/api/viewjson/{id}' , 'ApiController@viewjson');
+       Route::get('/api/get/{id}' , 'ApiController@get');
+       Route::get('/api/cancel/{id}' , 'ApiController@cancel');
 
-      Route::get('/api/sendequipment/{id}' , 'ApiController@sendequipment');
-      Route::get('/api/viewjsone/{id}' , 'ApiController@viewjsone');
-      Route::get('/api/getequipment/{id}' , 'ApiController@getequipment');
-      Route::get('/api/cancelequipment/{id}' , 'ApiController@cancelequipment');
+       Route::get('/api/sendequipment/{id}' , 'ApiController@sendequipment');
+       Route::get('/api/viewjsone/{id}' , 'ApiController@viewjsone');
+       Route::get('/api/getequipment/{id}' , 'ApiController@getequipment');
+       Route::get('/api/cancelequipment/{id}' , 'ApiController@cancelequipment');
        
 
-      Route::get('/file/index','FileController@index')->name('file.index');
+       Route::get('/file/index','FileController@index')->name('file.index');
    });
 });
+
