@@ -989,4 +989,4 @@
 		
 
 	</script>
-@endsection
+@endsections

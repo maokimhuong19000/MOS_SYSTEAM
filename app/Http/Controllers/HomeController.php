@@ -468,6 +468,17 @@ class HomeController extends Controller
         return redirect()->route('isubstance.isubstance_show', $id)->with('success', ' បញ្ចូនប្រតិវេទយ៍គយមរួចរាច់ / Upload Custom Declaration success');
     }
 
+
+    ///////ExportSubstance
+    public function exsubstance(){
+
+
+        
+
+
+    } 
+
+    
     public function isubStore(Request $request)
     {
 
@@ -1427,11 +1438,7 @@ class HomeController extends Controller
                 $equitmentrequest->place_export = $request->place_export;
                 $equitmentrequest->address = $request->address;
                 $equitmentrequest->customer_id = Auth::id();
-// <<<<<<< HEAD
-//                 // $equitmentrequest->invoice_value = "";
-// =======
-//                 // $equitmentrequest->invoicevalue = "";
-// >>>>>>> 819138b17a21efca174213b4b205d32c91fba87b
+
                 $equitmentrequest->file_shipping = "";
                 $equitmentrequest->file_custom_declareation = "";
                 $equitmentrequest->file_invoice = "";

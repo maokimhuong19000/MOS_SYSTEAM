@@ -132,7 +132,7 @@
 						 {{trans('front.imaterial_menu')}}
 			</a></li>
  <?php }  ?>
-			<li id="ididata" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="" onclick="">
+			<li id="ididata" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.exsubstance')}}"  onclick="">
 					Export Substance
 			</a></li>
 

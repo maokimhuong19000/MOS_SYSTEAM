@@ -410,6 +410,11 @@ class HomeController extends Controller
     }
     // isubstance=============================================================
 
+    // public function exsubstance()
+    // {
+    //     // This is just a placeholder logic for testing
+    //     return 'Hello, this is the exsubstance method!';
+    // }
     public function isubstance()
     {
         //$Material=Material::where('status',1)->get();
