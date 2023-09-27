@@ -471,8 +471,23 @@ class HomeController extends Controller
 
     ///////ExportSubstance
     public function exsubstance(){
+        
+                
+            
 
 
+    } 
+    
+    public function exsubstance_showdetail(){
+
+        
+        
+
+
+    } 
+    public function upexsubstance(){
+
+        
         
 
 
