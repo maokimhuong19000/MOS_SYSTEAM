@@ -91,6 +91,14 @@ Route::group(['middleware' => ['web', 'auth:customer']], function () {
     // Route::get('isubstance/isubstancelist','HomeController@show_material')->name('isubstance.showlist_isubstance');
     Route::get('isubstance/{id}/show_detail', 'HomeController@isubstance_detail')->name('isubstance.isubstance_show');
 
+    //Route exportsubstance//
+    Route::get('exsubstance', 'HomeController@exsubstance')->name('front.exsubstance');
+    
+    
+
+
+
+
 
     //route equipmentrequest
     Route::get('front/equitment', 'HomeController@equitment')->name('front.equitment');
@@ -111,7 +119,7 @@ Route::group(['middleware' => ['web', 'auth:customer']], function () {
     Route::get('front/reportm', 'HomeController@reportm')->name('front.reportm');
     Route::get('front/reporte', 'HomeController@reporte')->name('front.reporte');
     Route::get('about', 'HomeController@about')->name('front.front');
-    ;
+    
 
     Route::patch('front/resetpwd', 'HomeController@resetpwd')->name('front.resetpwd');
     Route::get('template', 'HomeController@template')->name('front.template');
@@ -217,8 +225,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('user/getuser', 'UserController@getuser')->name('user.getuser');
         Route::resource('user', 'UserController');
 
-        //Route exportsubstance//
-        Route::get('exsubstance', 'HomeController@exsubstance')->name('front.exsubstance');
+
 
 
         /// isubstance report 

@@ -116,6 +116,9 @@
 			<li id="idimaterial" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.equitment')}}" onclick="">
 						{{trans('front.imaterial_menu')}}
 			</a></li>
+			<li id="ididata" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.exsubstance')}}"  onclick="">
+					Export Substance
+			</a></li>
 			
 <?php  }elseif (@$Customer->ctype==1){ ?>
 				
@@ -125,6 +128,7 @@
 			<li id="idisubstance" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.isubstance')}}" onclick="">
 						 {{trans('front.isub_menu')}}
 			</a></li>
+			
 
  <?php }else{  ?>
 
@@ -132,10 +136,6 @@
 						 {{trans('front.imaterial_menu')}}
 			</a></li>
  <?php }  ?>
-			<li id="ididata" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.exsubstance')}}"  onclick="">
-					Export Substance
-			</a></li>
-
 			<li id="ididata" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.idata')}}" onclick="">
 					{{trans('front.idata_menu')}}
 			</a></li>
