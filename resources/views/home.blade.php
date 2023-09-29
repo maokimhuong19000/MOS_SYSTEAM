@@ -31,9 +31,6 @@
 @if( @$Customer->ctype != 2 )
 <div class="col-md-12 ">
 <div class="panel panel-moe">
- 
-
-
     <div class="panel-heading"><span id="data_isubstance " class="content_bottom_font_sm">{{trans('front.report_quota')}} </span></div>
     <div class="panel-body">
       <div class="col-sm-12 " > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
