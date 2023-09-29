@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Response;
 use App\Einvoice;
 use App\Elading;
@@ -1353,10 +1354,7 @@ class HomeController extends Controller
                             ->withErrors($validatedData)
                             ->withInput();
                     } else {
-                        foreach (
-                            $request->input("number")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("number") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
 
@@ -1376,10 +1374,7 @@ class HomeController extends Controller
                         $isubdetail = Materialrequest::findOrFail($id);
                         $isubdetail->Materialrequestdetails()->delete();
 
-                        foreach (
-                            $request->input("number")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("number") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
 
@@ -1670,12 +1665,12 @@ class HomeController extends Controller
             $result["status"] = $Aquota[0]->amount - ($new_qty + $total_use);
             $result["message"] =
                 $Aquota[0]->amount - ($new_qty + $total_use) < 0
-                    ? $Aquota[0]->substance .
-                        " អាចនាំចូលបានតែ /Can only Import (" .
-                        ($Aquota[0]->amount - $total_use) .
-                        " Kg ) លើសកូតាកំណត់/ Over Quota Limit " .
-                        ($Aquota[0]->amount - $total_use)
-                    : "";
+                ? $Aquota[0]->substance .
+                " អាចនាំចូលបានតែ /Can only Import (" .
+                ($Aquota[0]->amount - $total_use) .
+                " Kg ) លើសកូតាកំណត់/ Over Quota Limit " .
+                ($Aquota[0]->amount - $total_use)
+                : "";
         } else {
             $result["status"] = -1;
             $result["message"] = "មិនមានកូតា/ No Quota";
@@ -1737,13 +1732,47 @@ class HomeController extends Controller
             ),
         );
     }
-    
+
     /**===============Start Exoport Substance===================== */
     public function exsubstance()
     {
-        
-       
+        //$Material=Material::where('status',1)->get();
+        $Material = Aquota::join(
+            "comquotas",
+            "aquotas.id",
+            "=",
+            "comquotas.aquota_id",
+        )
+            //->join('customers','comquotas.customer_id','=','customers.id')
+            ->where("comquotas.customer_id", Auth::id())
+            ->where("year", date("Y"))
+            ->join("materials", "materials.id", "=", "aquotas.material_id")
+            ->get();
+        $countries = Country::where("status", 1)->get();
+        $entry = Port_Entry::where("status", 1)->get();
+        $Customer = Customer::with("Cominfo")->find(Auth::id());
+        $exportPort = Portexport::where("country_id", 1)->get(); // Portexport::all(); //Portexport::where('country_id',1);
+        $transport = Transport::all();
+        $cif = Incoterm::all();
+        $currency = Currency::all();
+        $uom = Uom::all();
+        //echo json_encode($exportPort);
+        return view(
+            "isubstance",
+            compact(
+                "Customer",
+                "Material",
+                "countries",
+                "entry",
+                "exportPort",
+                "transport",
+                "cif",
+                "currency",
+                "uom",
+            ),
+        );
     }
+
 
     public function exsubstance_showdetail()
     {
@@ -1754,8 +1783,8 @@ class HomeController extends Controller
 
 
     /**===============End Exoport Substance===================== */
-   
-     
+
+
     public function imaterial()
     {
         // Auth::id() =  Auth::user()->id;
@@ -1988,9 +2017,9 @@ class HomeController extends Controller
                             "substance" => $request->substance[$index],
                             "quality" => $request->quality[$index],
                             "billdate" => date(
-                                "y-m-d H:i:s",
-                                strtotime(request("billdate")),
-                            ),
+                                    "y-m-d H:i:s",
+                                    strtotime(request("billdate")),
+                                ),
                             "billnumber" => $request->input("billnumber"),
                             "currency" => $request->input("currency"),
                             "invoice_value_other_currency" => $request->input(
@@ -2155,10 +2184,7 @@ class HomeController extends Controller
                     } else {
                         $equitmentrequest = Equipmentrequest::findOrFail($id);
                         $equitmentrequest->Equipmentrequestdetail()->delete();
-                        foreach (
-                            $request->input("amount")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("amount") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
                                 $valdata = 1;

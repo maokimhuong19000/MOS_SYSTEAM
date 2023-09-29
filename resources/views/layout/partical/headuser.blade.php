@@ -110,8 +110,11 @@
 						 {{trans('front.iquota_menu')}}
 			</a></li>
 			<li id="idisubstance" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.isubstance')}}" onclick="">
-						 {{trans('front.isub_menu')}}
+						 Subtance
 			</a></li>
+			<!-- <li id="idisubstance" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.exsubstance')}}" onclick="">
+						 exportsubstance
+			</a></li> -->
 
 			<li id="idimaterial" class="padding-li content_title_sm animate fadeInLeft main_menu animated"><a href="{{route('front.equitment')}}" onclick="">
 						{{trans('front.imaterial_menu')}}
