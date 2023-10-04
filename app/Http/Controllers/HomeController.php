@@ -1736,7 +1736,8 @@ class HomeController extends Controller
     /**===============Start Exoport Substance===================== */
     public function exsubstance()
     {
-        echo'Hello Export Substance';
+        return view("exsubstance");
+      
     }
 
 

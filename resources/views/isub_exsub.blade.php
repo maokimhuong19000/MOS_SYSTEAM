@@ -1,3 +1,6 @@
+@extends('layout.front')
+@section('content')
+@include('layout.partical.headuser')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,13 +51,13 @@
                 <div class="col-xl-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
                   <div class="icon-box">
                     <div class="icon"><i class="fa-solid fa-file-import" style="color: #ffffff;"></i></div>
-                    <h4 class="title"><a href="{{route('front.isubstance')}}" class="stretched-link">Import Substance</a></h4>
+                    <h4 class="title"><a href="{{route('front.isubstance')}}" class="stretched-link">នាំចូលសារធាតុ</br>Import Substance</a></h4>
                   </div>
                 </div><!--End Icon Box -->
                 <div class="col-xl-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
                   <div class="icon-box">
                     <div class="icon"><i class="fa-solid fa-file-arrow-up" style="color: #ffffff;"></i></div>
-                    <h4 class="title"><a href="{{route('front.exsubstance')}}" class="stretched-link">Export Substance</a></h4>
+                    <h4 class="title"><a href="{{route('front.exsubstance')}}" class="stretched-link">នាំចេញសារធាតុ</br>Export Substance</a></h4>
                   </div>
                 </div><!--End Icon Box -->
               </div>
@@ -64,9 +67,7 @@
        
 
  
-  <!-- Footer Section -->
- 
-  <!-- End Footer Section -->
+
 
 
   <!-- Vendor JS Files -->

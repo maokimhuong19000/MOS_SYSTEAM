@@ -1,8 +1,8 @@
 @extends('layout.front')
 @section('content')
 @include('layout.partical.headuser')
-
 <div class="container">
+  
     <div class="col-sm-12 col-xs-12 padding_bottom padding-top-lg-extra bg_child ">
     <center>
           <div class="padding-top-xs">
@@ -11,9 +11,6 @@
     </center>
 <div class="col-sm-12 " > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
 <div class="col-md-12 no-padding ">
-
-
-
 
  <div class="flash-message">
                   @foreach (['error', 'warning', 'success', 'info'] as $key)
@@ -25,14 +22,11 @@
                     @endif
                   @endforeach
                 </div>
-
-
-
 @if( @$Customer->ctype != 2 )
 <div class="col-md-12 ">
 <div class="panel panel-moe">
     <div class="panel-heading"><span id="data_isubstance " class="content_bottom_font_sm">{{trans('front.report_quota')}} </span></div>
-    <div class="panel-body">
+    <div class="panel-body">    
       <div class="col-sm-12 " > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
       <div class="row label-assign">
         
