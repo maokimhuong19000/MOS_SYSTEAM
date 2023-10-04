@@ -16,8 +16,7 @@
                   @foreach (['error', 'warning', 'success', 'info'] as $key)
                     @if(Session::has($key))
                     
-                         <p class="alert alert-danger">{{ Session::get($key) }}
-                         </p>
+                         <p class="alert alert-danger">{{Session::get($key)}}</p>
                          
                     @endif
                   @endforeach
