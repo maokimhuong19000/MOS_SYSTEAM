@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Response;
 use App\Einvoice;
 use App\Elading;
@@ -585,6 +586,7 @@ class HomeController extends Controller
         $currency = Currency::all();
         $uom = Uom::all();
         //echo json_encode($exportPort);
+        // dd($currency);
         return view(
             "isubstance",
             compact(
@@ -1062,10 +1064,8 @@ class HomeController extends Controller
         $isubdetail->billdate = $request->billdate;
         $isubdetail->currency = $request->currency;
         $isubdetail->uom = $request->uom;
-        $isubdetail->invoice_value_other_currency =
-            $request->invoice_value_other_currency;
+        $isubdetail->invoice_value_other_currency = $request->invoice_value_other_currency;
         $isubdetail->Incoterm = $request->Incoterm;
-
         $isubdetail->save();
         return redirect()
             ->route("front.idata")
@@ -1139,7 +1139,7 @@ class HomeController extends Controller
                         "Y-m-d H:i:s",
                         strtotime(request("import_date")),
                     ),
-                    //                    $materialrequest->import_date=\App\Helpers\AppHelper::instance()->format_insert_date($request->import_date);
+//                  $materialrequest->import_date=\App\Helpers\AppHelper::instance()->format_insert_date($request->import_date);
                     "manufacture_option" =>
                         $request->input("purpose") == 1 ? 1 : 0,
                     "aircon_service_option" =>
@@ -1353,10 +1353,7 @@ class HomeController extends Controller
                             ->withErrors($validatedData)
                             ->withInput();
                     } else {
-                        foreach (
-                            $request->input("number")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("number") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
 
@@ -1376,10 +1373,7 @@ class HomeController extends Controller
                         $isubdetail = Materialrequest::findOrFail($id);
                         $isubdetail->Materialrequestdetails()->delete();
 
-                        foreach (
-                            $request->input("number")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("number") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
 
@@ -1670,12 +1664,12 @@ class HomeController extends Controller
             $result["status"] = $Aquota[0]->amount - ($new_qty + $total_use);
             $result["message"] =
                 $Aquota[0]->amount - ($new_qty + $total_use) < 0
-                    ? $Aquota[0]->substance .
-                        " អាចនាំចូលបានតែ /Can only Import (" .
-                        ($Aquota[0]->amount - $total_use) .
-                        " Kg ) លើសកូតាកំណត់/ Over Quota Limit " .
-                        ($Aquota[0]->amount - $total_use)
-                    : "";
+                ? $Aquota[0]->substance .
+                " អាចនាំចូលបានតែ /Can only Import (" .
+                ($Aquota[0]->amount - $total_use) .
+                " Kg ) លើសកូតាកំណត់/ Over Quota Limit " .
+                ($Aquota[0]->amount - $total_use)
+                : "";
         } else {
             $result["status"] = -1;
             $result["message"] = "មិនមានកូតា/ No Quota";
@@ -1737,10 +1731,11 @@ class HomeController extends Controller
             ),
         );
     }
-    
+
     /**===============Start Exoport Substance===================== */
     public function exsubstance()
     {
+        //$Material=Material::where('status',1)->get();
         $Material = Aquota::join(
             "comquotas",
             "aquotas.id",
@@ -1762,7 +1757,7 @@ class HomeController extends Controller
         $uom = Uom::all();
         //echo json_encode($exportPort);
         return view(
-            "isubstance",
+            "exsubstance",
             compact(
                 "Customer",
                 "Material",
@@ -1775,7 +1770,9 @@ class HomeController extends Controller
                 "uom",
             ),
         );
+      
     }
+
 
     public function exsubstance_showdetail()
     {
@@ -1785,9 +1782,15 @@ class HomeController extends Controller
     }
 
 
+    //test
+    public function isub_exsub()
+    {
+        return view("isub_exsub");
+    }
+
     /**===============End Exoport Substance===================== */
-   
-     
+
+
     public function imaterial()
     {
         // Auth::id() =  Auth::user()->id;
@@ -2020,9 +2023,9 @@ class HomeController extends Controller
                             "substance" => $request->substance[$index],
                             "quality" => $request->quality[$index],
                             "billdate" => date(
-                                "y-m-d H:i:s",
-                                strtotime(request("billdate")),
-                            ),
+                                    "y-m-d H:i:s",
+                                    strtotime(request("billdate")),
+                                ),
                             "billnumber" => $request->input("billnumber"),
                             "currency" => $request->input("currency"),
                             "invoice_value_other_currency" => $request->input(
@@ -2187,10 +2190,7 @@ class HomeController extends Controller
                     } else {
                         $equitmentrequest = Equipmentrequest::findOrFail($id);
                         $equitmentrequest->Equipmentrequestdetail()->delete();
-                        foreach (
-                            $request->input("amount")
-                            as $index => $value
-                        ) {
+                        foreach ($request->input("amount") as $index => $value) {
                             if ($value != null) {
                                 // check not null request value
                                 $valdata = 1;
