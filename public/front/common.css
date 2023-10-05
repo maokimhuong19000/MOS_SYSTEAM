@@ -1,3 +1,4 @@
+
 .modal-header{
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -23,3 +24,41 @@
 
 	border-bottom: 5px solid #0066ff;
 }
+.position-relative {
+	position: relative !important;
+  }
+
+.mt-6 {
+	
+	margin-top: 3rem !important;
+	margin-bottom: 3rem !important;
+  }
+  .icon-box {
+	background-color: rgb(0, 197, 89);
+	padding: 80px;
+	margin-right: 60px;
+	border-radius: 20px;
+	text-align: center;
+	color: aliceblue;
+	border: white;
+	opacity: 0;
+	animation: fadeIn 1.5s forwards ;
+  }
+  
+  @keyframes fadeIn {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
+  
+  
+  .title a{
+	font-size: 22px;
+	color: white;
+  }
+ .title a:hover{
+	color: black;
+ }
