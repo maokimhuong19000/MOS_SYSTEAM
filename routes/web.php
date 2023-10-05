@@ -92,8 +92,10 @@ Route::group(['middleware' => ['web', 'auth:customer']], function () {
     Route::get('isubstance/{id}/show_detail', 'HomeController@isubstance_detail')->name('isubstance.isubstance_show');
 
     //Route exportsubstance//
-    Route::get('exsubstance', 'HomeController@exsubstance')->name('front.exsubstance');
     Route::get('isub_exsub', 'HomeController@isub_exsub')->name('front.isub_exsub');
+    Route::get('exsubstance/save', 'HomeController@exsubstance')->name('exsubstance.save');
+    Route::get('exsubstance', 'HomeController@exsubstance')->name('front.exsubstance');
+    
     
     
 

@@ -586,6 +586,7 @@ class HomeController extends Controller
         $currency = Currency::all();
         $uom = Uom::all();
         //echo json_encode($exportPort);
+        // dd($currency);
         return view(
             "isubstance",
             compact(
@@ -1063,10 +1064,8 @@ class HomeController extends Controller
         $isubdetail->billdate = $request->billdate;
         $isubdetail->currency = $request->currency;
         $isubdetail->uom = $request->uom;
-        $isubdetail->invoice_value_other_currency =
-            $request->invoice_value_other_currency;
+        $isubdetail->invoice_value_other_currency = $request->invoice_value_other_currency;
         $isubdetail->Incoterm = $request->Incoterm;
-
         $isubdetail->save();
         return redirect()
             ->route("front.idata")
@@ -1140,7 +1139,7 @@ class HomeController extends Controller
                         "Y-m-d H:i:s",
                         strtotime(request("import_date")),
                     ),
-                    //                    $materialrequest->import_date=\App\Helpers\AppHelper::instance()->format_insert_date($request->import_date);
+//                  $materialrequest->import_date=\App\Helpers\AppHelper::instance()->format_insert_date($request->import_date);
                     "manufacture_option" =>
                         $request->input("purpose") == 1 ? 1 : 0,
                     "aircon_service_option" =>
@@ -1736,7 +1735,41 @@ class HomeController extends Controller
     /**===============Start Exoport Substance===================== */
     public function exsubstance()
     {
-        return view("exsubstance");
+        //$Material=Material::where('status',1)->get();
+        $Material = Aquota::join(
+            "comquotas",
+            "aquotas.id",
+            "=",
+            "comquotas.aquota_id",
+        )
+            //->join('customers','comquotas.customer_id','=','customers.id')
+            ->where("comquotas.customer_id", Auth::id())
+            ->where("year", date("Y"))
+            ->join("materials", "materials.id", "=", "aquotas.material_id")
+            ->get();
+        $countries = Country::where("status", 1)->get();
+        $entry = Port_Entry::where("status", 1)->get();
+        $Customer = Customer::with("Cominfo")->find(Auth::id());
+        $exportPort = Portexport::where("country_id", 1)->get(); // Portexport::all(); //Portexport::where('country_id',1);
+        $transport = Transport::all();
+        $cif = Incoterm::all();
+        $currency = Currency::all();
+        $uom = Uom::all();
+        //echo json_encode($exportPort);
+        return view(
+            "exsubstance",
+            compact(
+                "Customer",
+                "Material",
+                "countries",
+                "entry",
+                "exportPort",
+                "transport",
+                "cif",
+                "currency",
+                "uom",
+            ),
+        );
       
     }
 
