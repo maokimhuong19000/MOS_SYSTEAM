@@ -585,8 +585,9 @@ class HomeController extends Controller
         $cif = Incoterm::all();
         $currency = Currency::all();
         $uom = Uom::all();
+        $invoice_value = Iinvoice::all();
         //echo json_encode($exportPort);
-        // dd($currency);
+        //dd($invoice_value);
         return view(
             "isubstance",
             compact(
@@ -599,6 +600,7 @@ class HomeController extends Controller
                 "cif",
                 "currency",
                 "uom",
+                "invoice_value"
             ),
         );
     }
@@ -1776,9 +1778,13 @@ class HomeController extends Controller
 
     public function exsubstance_showdetail()
     {
+
+
     }
     public function upexsubstance()
     {
+
+
     }
 
 

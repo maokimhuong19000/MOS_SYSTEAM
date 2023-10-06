@@ -10,7 +10,7 @@
           <div class="padding-top-xs">
             <div class="content_bottom_font padding-sm text-center"><b>សារធាតុ/Substance</b></div>
         </div>  
-                    <section id="hero" class="hero">
+          <section id="hero" class="hero">
                       <div class="icon-boxes position-relative">
                         <div class="container position-relative">
                           <div class="row gy-4 mt-6">

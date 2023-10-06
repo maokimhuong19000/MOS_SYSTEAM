@@ -7,7 +7,7 @@
 <div class="container">
 <div  class="col-sm-12 col-xs-12 padding_bottom padding-top-lg-extra bg_child ">
         <div class="padding-top-xs">
-            <div class="content_bottom_font padding-sm text-center"><b>{{trans('head.fro_isubstance')}}</b></div>
+            <div class="content_bottom_font padding-sm text-center"><b>នាំចូលឧបករណ៍/Import Equipment</b></div>
         </div>   
 		       
 <div class="col-sm-12 " > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>

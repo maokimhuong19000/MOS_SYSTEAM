@@ -2,7 +2,7 @@
 @section('content')
 @include('layout.partical.headuser')
 	
-<form id="form_isub" action="{{route('exsubstance.save')}}" method="POST" enctype="multipart/form-data">
+<form id="form_isub" action="{{route('isubstance.save')}}" method="POST" enctype="multipart/form-data">
 	{{ csrf_field() }}
 <div class="container">
 <div  class="col-sm-12 col-xs-12 padding_bottom padding-top-lg-extra bg_child ">
@@ -105,7 +105,7 @@
 	  		    			</div>
 	  		    		</div>
 	  		    		
-	  		    		<!-- <div class="col-md-6">
+	  		    		<div class="col-md-6">
 						  <div class="form-group">
 	  		    				<span>{{trans('front_isubstance.place_exportmanufactur')}}</span>
 	  		    				<span class="star_require text-danger">*</span>
@@ -116,9 +116,9 @@
 							      	@endforeach
 							    </select>
 	  		    			</div>
-	  		    		</div> -->
+	  		    		</div>
 
-						<!-- <div class="col-md-6">
+						<div class="col-md-6">
 
 							      <div class="form-group">
 								  		<span><input type="checkbox" name="transit" value="1" id="transit">{{trans('front_isubstance.transit')}}&nbsp;&nbsp;:</span>
@@ -130,7 +130,7 @@
 									    
 								</div>
 
-						</div> -->
+						</div>
 
 						<div class="col-md-6">
 
@@ -213,7 +213,7 @@
 	  		    			</div>
 	  		    		</div>
 
-	  		    	<!-- <div class="col-md-6">
+	  		    	<div class="col-md-6">
 	  		    			<div class="form-group">
 							    <span><input type="checkbox" name="" value="1" id="percent_bus">{{trans('own_business.fro_isubstance')}}&nbsp;&nbsp;:</span>
 							    <div>
@@ -235,7 +235,7 @@
 									</div>
 							    </div>
 							</div>
-	  		    	</div> -->
+	  		    	</div>
 
 	  				<div class="col-md-6">
 	  						<div class="form-group " id="dfs_1">

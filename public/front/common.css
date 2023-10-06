@@ -54,11 +54,10 @@
 	}
   }
   
-  
   .title a{
 	font-size: 22px;
 	color: white;
   }
  .title a:hover{
-	color: black;
+	color: lightgoldenrodyellow;
  }
