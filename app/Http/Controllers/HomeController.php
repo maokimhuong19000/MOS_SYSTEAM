@@ -586,9 +586,6 @@ class HomeController extends Controller
         $currency = Currency::all();
         $uom = Uom::all();
         $invoice_value = Iinvoice::all();
-        $invoicevalue=$invoice_value::all();
-        //echo json_encode($exportPort);
-
         return view(
             "isubstance",
             compact(
@@ -1738,7 +1735,42 @@ class HomeController extends Controller
     /**===============Start Exoport Substance===================== */
     public function exsubstance()
     {
-       
+        //$Material=Material::where('status',1)->get();
+        $Material = Aquota::join(
+            "comquotas",
+            "aquotas.id",
+            "=",
+            "comquotas.aquota_id",
+        )
+            //->join('customers','comquotas.customer_id','=','customers.id')
+            ->where("comquotas.customer_id", Auth::id())
+            ->where("year", date("Y"))
+            ->join("materials", "materials.id", "=", "aquotas.material_id")
+            ->get();
+        $countries = Country::where("status", 1)->get();
+        $entry = Port_Entry::where("status", 1)->get();
+        $Customer = Customer::with("Cominfo")->find(Auth::id());
+        $exportPort = Portexport::where("country_id", 1)->get(); // Portexport::all(); //Portexport::where('country_id',1);
+        $transport = Transport::all();
+        $cif = Incoterm::all();
+        $currency = Currency::all();
+        $uom = Uom::all();
+        $invoice_value = Iinvoice::all();
+        return view(
+            "exsubstance",
+            compact(
+                "Customer",
+                "Material",
+                "countries",
+                "entry",
+                "exportPort",
+                "transport",
+                "cif",
+                "currency",
+                "uom",
+                "invoice_value"
+            ),
+        );
     }
 
 
