@@ -72,6 +72,8 @@
 </div>
 @endif
 
+forexportsubstancerequire
+
 @if( @$Customer->ctype != 1 )
 <div class="col-md-12 ">
   <div class="panel panel-moe">
@@ -113,6 +115,8 @@
       </div>
   </div>
 @endif
+
+
 
 @if( @$Customer->ctype != 2 )
 <div class="col-md-12 ">

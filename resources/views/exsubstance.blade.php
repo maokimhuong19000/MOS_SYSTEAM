@@ -109,49 +109,6 @@
 						  <div class="form-group">
 	  		    				<span>{{trans('front_isubstance.place_exportmanufactur')}}</span>
 	  		    				<span class="star_require text-danger">*</span>
-	  		    				<select id="place_export" name="place_export" class="form-control">
-							      	@foreach($exportPort as $port)
-							      	<option  value="{{$port->port_code}}"  {{ (old('place_export') == $port->port_code? "selected":"" )}}>
-										{{$port->port_name}}</option>
-							      	@endforeach
-							    </select>
-	  		    			</div>
-	  		    		</div>
-
-						<div class="col-md-6">
-
-							      <div class="form-group">
-								  		<span><input type="checkbox" name="transit" value="1" id="transit">{{trans('front_isubstance.transit')}}&nbsp;&nbsp;:</span>
-									    <select id="tcountry"   class="form-control tcountry" name="tcountry" disabled="disabled">
-										@foreach($countries as $country)
-											<option value="{{$country->id}}">{{$country->countries_name}}</option>
-										@endforeach
-										</select>
-									    
-								</div>
-
-						</div>
-
-						<div class="col-md-6">
-
-								<div class="form-group">
-									<span> {{trans('front_isubstance.transit_port')}}&nbsp;&nbsp;:</span>
-									<select id="des_port"   class="form-control des_port" name="des_port" disabled="disabled">
-									@foreach($exportPort as $port)
-										<option  value="{{$port->port_code}}" >
-											{{$port->port_name}}</option>
-										@endforeach
-									</select>
-									
-								</div>
-							
-						</div>
-						<div class="col-md-12"></div>
-
-						<div class="col-md-6">
-	  		    			<div class="form-group">
-	  		    				<span class="control-label">{{trans('front_isubstance.place_importmanufactur')}}</span>
-							    <span class="star_require text-danger">*</span>
 							     <select name="place_import" id="place_import" class="form-control">
 								 	@foreach($entry as $entries)
 									 	<option value="{{$entries->id}}" 
@@ -160,6 +117,50 @@
 										 </option>
 									 @endforeach   
 							     </select>
+	  		    			</div>
+	  		    		</div>
+
+						<div class="col-md-6">
+
+							      <!-- <div class="form-group">
+								  		<span><input type="checkbox" name="transit" value="1" id="transit">{{trans('front_isubstance.transit')}}&nbsp;&nbsp;:</span>
+									    <select id="tcountry"   class="form-control tcountry" name="tcountry" disabled="disabled">
+										@foreach($countries as $country)
+											<option value="{{$country->id}}">{{$country->countries_name}}</option>
+										@endforeach
+										</select>
+									    
+								</div> -->
+
+						</div>
+
+						<div class="col-md-6">
+
+								<!-- <div class="form-group">
+									<span> {{trans('front_isubstance.transit_port')}}&nbsp;&nbsp;:</span>
+									<select id="des_port"   class="form-control des_port" name="des_port" disabled="disabled">
+									@foreach($exportPort as $port)
+										<option  value="{{$port->port_code}}" >
+											{{$port->port_name}}</option>
+										@endforeach
+									</select>
+									
+								</div> -->
+							
+						</div>
+						<div class="col-md-12"></div>
+
+						<div class="col-md-6">
+	  		    			<div class="form-group">
+	  		    				<span class="control-label">{{trans('front_isubstance.place_importmanufactur')}}</span>
+							    
+								  <span class="star_require text-danger">*</span>
+	  		    				<select id="place_export" name="place_export" class="form-control">
+							      	@foreach($exportPort as $port)
+							      	<option  value="{{$port->port_code}}"  {{ (old('place_export') == $port->port_code? "selected":"" )}}>
+										{{$port->port_name}}</option>
+							      	@endforeach
+							    </select>
 	  		    			</div>
 	  		    		</div>
 
@@ -983,9 +984,5 @@
 		}
 
 		// =====================================end function checked ==============================================
-
-
-		
-
 	</script>
 @endsection
