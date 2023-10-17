@@ -601,6 +601,7 @@ class HomeController extends Controller
                 "invoice_value"
             ),
         );
+        
     }
     public function isubdeclare(Request $request, $id)
     {
@@ -1786,7 +1787,7 @@ class HomeController extends Controller
     }
 
 
-    //test
+    //Substance Choose
     public function isub_exsub()
     {
         return view("isub_exsub");
